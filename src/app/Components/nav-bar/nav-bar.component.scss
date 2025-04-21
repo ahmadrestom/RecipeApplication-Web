@@ -5,6 +5,7 @@
         gap: 30px;
 
         li{
+            position: relative;
             list-style-type: none;
             a{
                 text-decoration: none;
@@ -14,4 +15,20 @@
             }
         }
     }
+}
+
+li::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    left: 50%;
+    bottom: -5px;
+    background-color: #000;
+    transition: width 0.5s ease;
+    transform: translateX(-50%);
+}
+
+li:hover::after{
+    width: 100%;
 }
