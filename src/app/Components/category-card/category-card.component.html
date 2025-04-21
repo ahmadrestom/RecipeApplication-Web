@@ -1,0 +1,21 @@
+<div class="swiper-container">
+  <swiper-container
+  slides-per-view="3"
+  space-between="1"
+  navigation="false"
+  pagination="false"
+  loop="true"
+  autoplay="true"
+  autoplay-delay="1000" 
+  effect="coverflow"
+  centeredSlides="true"
+  speed="1000"
+>
+  <swiper-slide *ngFor="let category of categories">
+    <div class="category-card" [ngStyle]="{'background-color': getRandomColor()}">
+      <div class="img-container"><img [src]="categoryIconMap[category.category_name]" alt="icon" class="icon"/></div>
+      <div>{{ category.category_name }}</div>
+    </div>
+  </swiper-slide>
+</swiper-container>
+</div>
