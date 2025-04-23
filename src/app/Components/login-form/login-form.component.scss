@@ -1,0 +1,112 @@
+:host {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  
+  .login-form {
+    width: 100%;
+    padding: 2.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  
+    .form-group {
+      margin-bottom: 1.75rem;
+      
+      label {
+        display: block;
+        margin-bottom: 0.75rem;
+        font-weight: 500;
+        color: #333;
+        font-size: 0.95rem;
+      }
+      
+      .input-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        
+        .input-icon {
+          position: absolute;
+          left: 12px;
+          width: 20px;
+          height: 20px;
+          fill: #777;
+          z-index: 2;
+        }
+        
+        input {
+          width: 100%;
+          padding: 0.85rem 1rem 0.85rem 40px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          font-size: 1rem;
+          transition: all 0.3s ease;
+          
+          &:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74,144,226,0.2);
+          }
+          
+          &::placeholder {
+            color: #aaa;
+          }
+        }
+        
+        .toggle-password {
+          position: absolute;
+          right: 12px;
+          cursor: pointer;
+          
+          .eye-icon {
+            width: 20px;
+            height: 20px;
+            fill: #777;
+            transition: all 0.2s ease;
+            
+            &:hover {
+              fill: #555;
+            }
+          }
+        }
+      }
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 0.9rem;
+      background: linear-gradient(135deg, rgb(18,149,117), rgb(10,120,100));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(74,144,226,0.2);
+    //   /18, 149, 117, 1
+      &:hover {
+        background: linear-gradient(135deg, rgb(9, 147, 147), rgb(29, 227, 128));
+        transform: translateY(-1px);
+        box-shadow: 0 6px 8px rgba(74,144,226,0.3);
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+      
+      .btn-icon {
+        width: 18px;
+        height: 18px;
+        fill: white;
+      }
+    }
+  }

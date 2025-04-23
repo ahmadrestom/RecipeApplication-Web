@@ -11,8 +11,8 @@
   centeredSlides="true"
   speed="1000"
 >
-  <swiper-slide *ngFor="let category of categories">
-    <div class="category-card" [ngStyle]="{'background-color': getRandomColor()}">
+  <swiper-slide *ngFor="let category of categories, let i = index">
+    <div class="category-card" [ngStyle]="{ 'background-color': colors[i] }">
       <div class="img-container"><img [src]="categoryIconMap[category.category_name]" alt="icon" class="icon"/></div>
       <div>{{ category.category_name }}</div>
     </div>

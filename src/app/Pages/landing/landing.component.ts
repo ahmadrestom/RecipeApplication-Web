@@ -10,4 +10,5 @@ import { CategoryCardComponent } from '../../Components/category-card/category-c
   styleUrl: './landing.component.scss'
 })
 export class LandingComponent {
+  
 }

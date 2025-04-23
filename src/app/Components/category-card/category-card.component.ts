@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class CategoryCardComponent implements OnInit{
   
   categories: Category[] = [];
+  colors: string[] = [];
   constructor(private categoryService: CategoryService){}
 
   categoryIconMap: { [key: string]: string } = {
@@ -32,7 +33,10 @@ export class CategoryCardComponent implements OnInit{
   };
 
   ngOnInit():void{
-    this.getCategories();
+    this.categoryService.getAllCategories().subscribe(data => {
+      this.categories = data;
+      this.colors = data.map(() => this.getRandomColor());
+    });
   }
   getCategories():void{
     this.categoryService.getAllCategories().subscribe(
