@@ -1,0 +1,25 @@
+.food-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+  }
+  .food-item {
+    position: absolute;
+    font-size: 24px;
+    animation-name: floating;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    will-change: transform;
+  }
+  @keyframes floating {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(50px, -30px) rotate(5deg); }
+    50% { transform: translate(100px, 0) rotate(0deg); }
+    75% { transform: translate(50px, 30px) rotate(-5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+  }

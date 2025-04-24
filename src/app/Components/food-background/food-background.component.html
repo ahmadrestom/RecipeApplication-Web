@@ -1,0 +1,7 @@
+<div class="food-background">
+    <div *ngFor="let item of items" class="food-item" [style.left.px]="item.x" [style.top.px]="item.y"
+        [style.width.px]="item.size" [style.height.px]="item.size" [style.animation-duration.s]="item.duration"
+        [style.animation-delay.s]="item.delay">
+        {{item.icon}}
+    </div>
+</div>

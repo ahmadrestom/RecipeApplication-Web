@@ -3,12 +3,12 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { LoginFormComponent } from '../../Components/login-form/login-form.component';
 import { SignUpFormComponent } from '../../Components/sign-up-form/sign-up-form.component';
 import { CommonModule } from '@angular/common';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { FoodBackgroundComponent } from '../../Components/food-background/food-background.component';
 
 @Component({
   selector: 'app-authentication',
   standalone: true,
-  imports: [LoginFormComponent, SignUpFormComponent, CommonModule, RouterModule],
+  imports: [LoginFormComponent, SignUpFormComponent, CommonModule, RouterModule,FoodBackgroundComponent],
   templateUrl: './authentication.component.html',
   styleUrl: './authentication.component.scss'
 })
