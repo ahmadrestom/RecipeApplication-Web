@@ -1,1 +1,25 @@
-<app-nav-bar></app-nav-bar>
+<app-header></app-header>
+<div class="home-container1">
+    <div class="home-text1">
+        <h1>Your Daily Dish<br>A <span>Food</span> Journey</h1>
+        <p>
+            Discover delicious recipes from around the world! Whether you're a beginner or a pro,
+            find easy-to-follow recipes, save your favorites, and start cooking.
+        </p>
+        <app-button [text]="'View Recipes'"></app-button>
+    </div>
+    <div class="home-image1">
+        <img src="assets/home-plate.png" alt="Home recipe image">
+        <app-rating-card [rating]="4"></app-rating-card>
+    </div>
+</div>
+<div class="home-container2">
+    <div class="home-image2">
+        <img src="assets/ShareRecipe.jpg" alt="Share recipe image">
+    </div>
+    <div class="home-text2">
+        <h1>Share your <span>Recipes</span></h1>
+        <p>Showcase your best dishes, inspire other home cooks, and become part of our growing food community!</p>
+        <app-button [text]="'Create Recipes'"></app-button>
+    </div>
+</div>
