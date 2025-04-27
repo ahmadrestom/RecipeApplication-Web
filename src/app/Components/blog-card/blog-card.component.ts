@@ -10,4 +10,25 @@ import { Blog } from '../../Models/blog';
 export class BlogCardComponent {
 
   @Input() blog: Blog | null = null;
+
+  goToUrl():void{
+    window.open(this.blog?.url, '_blank');
+  }
+
+  get formattedDate():string{
+    if(!this.blog?.publishedAt) return ``;
+    return this.formatDate(this.blog.publishedAt);
+  }
+
+  formatDate(date?:Date):string{
+    if(!date) return ``;
+    const d = new Date(date);
+    const day = d.getUTCDate();
+    const month = d.getUTCMonth()+1;
+    const year = d.getUTCFullYear();
+    const hours = d.getUTCHours();
+    const minutes = d.getUTCMinutes().toString().padStart(2, '0');
+
+    return `${month}/${day}/${year} ${hours}:${minutes}(GMT)`;
+  }
 }

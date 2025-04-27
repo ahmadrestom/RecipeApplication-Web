@@ -1,8 +1,11 @@
-<div class="blog-card">
+<div (click)="goToUrl()">
     <div class="blog-image">
         <img [src]="blog?.urlToImage" alt="">
+        <h2>{{blog?.title}}</h2>
+        <p>{{blog?.description}}</p>
     </div>
-    <div>
-        <p>{{blog?.title}}</p>
+    <div class="blog-author-date">
+        <span>By: {{blog?.author}}</span>
+        <span>{{formattedDate}}</span>
     </div>
 </div>

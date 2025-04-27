@@ -26,7 +26,11 @@
     </div>
 </div>
 <div class="home-container4">
-    <div class="blogs" >
-        <app-blog-card *ngFor="let blog of blogs" [blog]="blog"></app-blog-card>
+    <h1>Blogs</h1>
+    <div class="blogs">
+        <app-blog-card *ngFor="let blog of visibleBlogs" [blog]="blog"></app-blog-card>
+    </div>
+    <div class="view-more-container">
+        <a href="" (click)="viewMore(); $event.preventDefault()" *ngIf="blogsToShow<blogs.length">View more >></a>
     </div>
 </div>

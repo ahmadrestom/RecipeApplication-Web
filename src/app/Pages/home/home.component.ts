@@ -16,19 +16,30 @@ import { CommonModule } from '@angular/common';
 export class HomeComponent implements OnInit{
 
   blogs: Blog[]= [];
+  visibleBlogs: Blog[] = [];
+  blogsToShow = 2;
+  increment = 2;
+
   constructor(private blogService: BlogService){};
+
   ngOnInit(){
     this.getBlogs();
   }
+
   getBlogs(): void{
     this.blogService.getLatestBlogs().subscribe(
       (blogs) => {
         this.blogs = blogs;
+        this.visibleBlogs = this.blogs.slice(0, this.blogsToShow);
       },
       (error) => {
         console.error('Error, cannot fetch blogs', error);
       }
     )
+  }
+  viewMore():void{
+    this.blogsToShow += this.increment;
+    this.visibleBlogs = this.blogs.slice(0, this.blogsToShow);
   }
 
 }
