@@ -10,6 +10,9 @@ import { Component, Input } from '@angular/core';
 export class RatingCardComponent {
   stars: number[] = [1, 2, 3, 4, 5];
   @Input() rating: number=0;
+  @Input() name: string = '';
+  @Input() review: string='';
+  @Input() imageUrl: string = '';
 
   setRating(star: number) {
     this.rating = star;

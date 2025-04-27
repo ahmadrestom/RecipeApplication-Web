@@ -85,3 +85,14 @@ app-rating-card{
         color: rgb(18, 149, 117, 1);
     }
 }
+
+.home-container4{
+    width: 100%;
+}
+
+.blogs{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 20px;
+}

@@ -10,7 +10,9 @@
     </div>
     <div class="home-image1">
         <img src="assets/home-plate.png" alt="Home recipe image">
-        <app-rating-card [rating]="4"></app-rating-card>
+        <app-rating-card [name]="'Sara Johnson'" [imageUrl]="'assets/SaraJohnson.jpeg'"
+            [review]="'Wow, this recipe is a flavor explosion in my mouth. Very delicious'" [rating]="4">
+        </app-rating-card>
     </div>
 </div>
 <div class="home-container2">
@@ -21,5 +23,10 @@
         <h1>Share your <span>Recipes</span></h1>
         <p>Showcase your best dishes, inspire other home cooks, and become part of our growing food community!</p>
         <app-button [text]="'Create Recipes'"></app-button>
+    </div>
+</div>
+<div class="home-container4">
+    <div class="blogs" >
+        <app-blog-card *ngFor="let blog of blogs" [blog]="blog"></app-blog-card>
     </div>
 </div>

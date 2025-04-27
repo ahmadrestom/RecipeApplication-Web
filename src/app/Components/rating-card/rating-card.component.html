@@ -1,10 +1,10 @@
 <div class="rating-card">
     <div class="rating-card-inner">
         <div class="avatar">
-            <img src="assets/SaraJohnson.jpeg" alt="user">
+            <img [src]="imageUrl" alt="user">
         </div>
         <div class="rating-card-name-rating">
-            <h4>Sara Johnson</h4>
+            <h4>{{name}}</h4>
             <div class="star-rating">
                 <ng-container *ngFor="let star of stars">
                     <i class="star" [class.filled]="star <= rating">
@@ -15,5 +15,5 @@
             </div>
         </div>
     </div>
-    <p>Wow, this recipe is a flavor explosion in my mouth. Very delicious</p>
+    <p>{{review}}</p>
 </div>
