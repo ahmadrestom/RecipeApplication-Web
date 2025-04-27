@@ -6,27 +6,33 @@ import { Blog } from '../../Models/blog';
 import { BlogService } from '../../Services/blog.service';
 import { BlogCardComponent } from '../../Components/blog-card/blog-card.component';
 import { CommonModule } from '@angular/common';
+import { RecipeService } from '../../Services/recipe.service';
+import { Recipe } from '../../Models/recipe';
 
 @Component({
   selector: 'app-home',
-  imports: [HeaderComponent, RatingCardComponent,ButtonComponent,BlogCardComponent, CommonModule],
+  imports: [HeaderComponent, RatingCardComponent, ButtonComponent, BlogCardComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
 
-  blogs: Blog[]= [];
+  blogs: Blog[] = [];
   visibleBlogs: Blog[] = [];
+  recipes: Recipe[] = [];
+  recentRecipes: Recipe[] = [];
   blogsToShow = 2;
   increment = 2;
 
-  constructor(private blogService: BlogService){};
+  constructor(private recipeService: RecipeService, private blogService: BlogService) { };
 
-  ngOnInit(){
+  ngOnInit() {
     this.getBlogs();
+    this.fetchRecentRecipes();
+    this.fetchRecipes();
   }
 
-  getBlogs(): void{
+  getBlogs(): void {
     this.blogService.getLatestBlogs().subscribe(
       (blogs) => {
         this.blogs = blogs;
@@ -37,9 +43,29 @@ export class HomeComponent implements OnInit{
       }
     )
   }
-  viewMore():void{
+  viewMore(): void {
     this.blogsToShow += this.increment;
     this.visibleBlogs = this.blogs.slice(0, this.blogsToShow);
+  }
+  fetchRecipes(): void {
+    this.recipeService.getRecipes().subscribe({
+      next: (data) => {
+        this.recipes = data;
+      },
+      error: (error) => {
+        console.error('Error fetching recipes: ', error);
+      }
+    })
+  }
+  fetchRecentRecipes(): void {
+    this.recipeService.getRecentRecipes().subscribe({
+      next: (data) => {
+        this.recentRecipes = data;
+      },
+      error: (error) => {
+        console.error('Error fetching recipes: ', error);
+      }
+    })
   }
 
 }
