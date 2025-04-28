@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="image">
+        <img [src]="recipe?.imageUrl" alt="{{recipe?.recipeName}} Image">
+    </div>
+    <div class="star-rating">
+        <ng-container *ngFor="let star of stars">
+            <i class="star" [class.filled]="star <= recipe?.rating!">
+                ★
+            </i>
+        </ng-container>
+    </div>
+    <div class="recipeName">
+        <p>{{recipe?.recipeName}}</p>
+    </div>
+    <div class="chef-cal">
+        <div class="chef">
+            <div class="chef-image">
+                <img [src]="recipe?.chef?.image_url">
+            </div>
+            <p>{{recipe?.chef?.firstName}} {{recipe?.chef?.lastName}}</p>
+        </div>
+        <span>
+            <i class="fas fa-fire" style="color:rgb(18, 149, 117, 1);"></i>  {{recipe?.ni?.calories}}
+        </span>
+    </div>
+</div>

@@ -6,12 +6,11 @@ import { Blog } from '../../Models/blog';
 import { BlogService } from '../../Services/blog.service';
 import { BlogCardComponent } from '../../Components/blog-card/blog-card.component';
 import { CommonModule } from '@angular/common';
-import { RecipeService } from '../../Services/recipe.service';
-import { Recipe } from '../../Models/recipe';
+import { RecipeContainerComponent } from '../../Components/recipe-container/recipe-container.component';
 
 @Component({
   selector: 'app-home',
-  imports: [HeaderComponent, RatingCardComponent, ButtonComponent, BlogCardComponent, CommonModule],
+  imports: [HeaderComponent, RatingCardComponent, ButtonComponent, BlogCardComponent, CommonModule,RecipeContainerComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -19,17 +18,13 @@ export class HomeComponent implements OnInit {
 
   blogs: Blog[] = [];
   visibleBlogs: Blog[] = [];
-  recipes: Recipe[] = [];
-  recentRecipes: Recipe[] = [];
   blogsToShow = 2;
   increment = 2;
 
-  constructor(private recipeService: RecipeService, private blogService: BlogService) { };
+  constructor(private blogService: BlogService) {};
 
   ngOnInit() {
     this.getBlogs();
-    this.fetchRecentRecipes();
-    this.fetchRecipes();
   }
 
   getBlogs(): void {
@@ -47,25 +42,4 @@ export class HomeComponent implements OnInit {
     this.blogsToShow += this.increment;
     this.visibleBlogs = this.blogs.slice(0, this.blogsToShow);
   }
-  fetchRecipes(): void {
-    this.recipeService.getRecipes().subscribe({
-      next: (data) => {
-        this.recipes = data;
-      },
-      error: (error) => {
-        console.error('Error fetching recipes: ', error);
-      }
-    })
-  }
-  fetchRecentRecipes(): void {
-    this.recipeService.getRecentRecipes().subscribe({
-      next: (data) => {
-        this.recentRecipes = data;
-      },
-      error: (error) => {
-        console.error('Error fetching recipes: ', error);
-      }
-    })
-  }
-
 }

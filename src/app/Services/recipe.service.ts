@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RecipeService {
-  private recentRecipesUrl = `${privateUrl}/recipe//getRecentRecipes`;
-  private recipesUrl = `${privateUrl}/recipe//getRecentRecipes/getAllRecipes`;
+  private recentRecipesUrl = `${privateUrl}/recipe/getRecentRecipes`;
+  private recipesUrl = `${privateUrl}/recipe/getAllRecipes`;
 
   constructor(private http: HttpClient){}
 
