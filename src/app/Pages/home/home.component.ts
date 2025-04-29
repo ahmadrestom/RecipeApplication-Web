@@ -10,7 +10,14 @@ import { RecipeContainerComponent } from '../../Components/recipe-container/reci
 
 @Component({
   selector: 'app-home',
-  imports: [HeaderComponent, RatingCardComponent, ButtonComponent, BlogCardComponent, CommonModule,RecipeContainerComponent],
+  imports: [
+    HeaderComponent, 
+    RatingCardComponent, 
+    ButtonComponent, 
+    BlogCardComponent, 
+    CommonModule,
+    RecipeContainerComponent
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

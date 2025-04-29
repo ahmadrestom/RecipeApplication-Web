@@ -15,7 +15,12 @@ export class RecipeContainerComponent implements OnInit{
   constructor(private recipeService: RecipeService){};
 
   recipes: Recipe[] = [];
+  visibleRecipes: Recipe[] = [];
   recentRecipes: Recipe[] = [];
+  visibleRecentRecipes: Recipe[] = [];
+
+  recipesToShow = 3;
+  increment = 3;
   loadingStates: { [recipeId: string]: boolean } = {};
 
   ngOnInit(): void {
@@ -23,10 +28,16 @@ export class RecipeContainerComponent implements OnInit{
     this.fetchRecipes();
   }
 
+  viewMore(): void {
+    this.recipesToShow += this.increment;
+    this.visibleRecipes = this.recipes.slice(0, this.recipesToShow);
+  }
+
   fetchRecipes(): void {
     this.recipeService.getRecipes().subscribe({
       next: (data) => {
         this.recipes = data;
+        this.visibleRecipes = this.recipes.slice(0, this.recipesToShow);
         this.preloadImages(this.recipes);
       },
       error: (error) => {

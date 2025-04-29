@@ -1,4 +1,8 @@
 <h1>Trending Recipes</h1>
 <div class="recipes">
-    <app-recipe-card *ngFor="let i of recipes" [recipe]="i"></app-recipe-card>
+    <app-recipe-card *ngFor="let i of visibleRecipes" [recipe]="i"></app-recipe-card>
+    
+</div>
+<div class="view-more-container">
+    <a href="" (click)="viewMore(); $event.preventDefault()" *ngIf="recipesToShow<recipes.length">View more >></a>
 </div>

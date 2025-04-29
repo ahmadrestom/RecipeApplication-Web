@@ -10,4 +10,19 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+    
 }
+.view-more-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    
+    a {
+        text-decoration: none;
+        color: rgb(18, 149, 117, 1);
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+}
+
