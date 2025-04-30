@@ -7,6 +7,7 @@ import { BlogService } from '../../Services/blog.service';
 import { BlogCardComponent } from '../../Components/blog-card/blog-card.component';
 import { CommonModule } from '@angular/common';
 import { RecipeContainerComponent } from '../../Components/recipe-container/recipe-container.component';
+import { NewSettlerComponent } from '../../Components/new-settler/new-settler.component';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ import { RecipeContainerComponent } from '../../Components/recipe-container/reci
     ButtonComponent, 
     BlogCardComponent, 
     CommonModule,
-    RecipeContainerComponent
+    RecipeContainerComponent,
+    NewSettlerComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
