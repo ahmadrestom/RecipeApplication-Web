@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RecipeCardComponent } from '../recipe-card/recipe-card.component';
 import { RecipeService } from '../../Services/recipe.service';
 import { Recipe } from '../../Models/recipe';
@@ -14,6 +14,8 @@ export class RecipeContainerComponent implements OnInit{
 
   constructor(private recipeService: RecipeService){};
 
+  @Input() title:string = '';
+
   recipes: Recipe[] = [];
   visibleRecipes: Recipe[] = [];
   recentRecipes: Recipe[] = [];
@@ -21,6 +23,8 @@ export class RecipeContainerComponent implements OnInit{
 
   recipesToShow = 3;
   increment = 3;
+  recentRecipesToShow = 3;
+  incrementr = 2;
   loadingStates: { [recipeId: string]: boolean } = {};
 
   ngOnInit(): void {
@@ -28,9 +32,13 @@ export class RecipeContainerComponent implements OnInit{
     this.fetchRecipes();
   }
 
-  viewMore(): void {
+  viewMoreRecipes(): void {
     this.recipesToShow += this.increment;
     this.visibleRecipes = this.recipes.slice(0, this.recipesToShow);
+  }
+  viewMoreRecentRecipes(): void{
+    this.recentRecipesToShow += this.incrementr;
+    this.visibleRecentRecipes = this.recentRecipes.slice(0, this.recentRecipesToShow);
   }
 
   fetchRecipes(): void {
@@ -49,6 +57,7 @@ export class RecipeContainerComponent implements OnInit{
     this.recipeService.getRecentRecipes().subscribe({
       next: (data) => {
         this.recentRecipes = data;
+        this.visibleRecentRecipes = this.recentRecipes.slice(0, this.recipesToShow);
         this.preloadImages(this.recentRecipes);
       },
       error: (error) => {

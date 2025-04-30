@@ -25,7 +25,7 @@
         <app-button [text]="'Create Recipes'"></app-button>
     </div>
 </div>
-<app-recipe-container></app-recipe-container>
+<app-recipe-container [title]="'Trending Recipes'"></app-recipe-container>
 <div class="home-container4">
     <h1>Blogs</h1>
     <div class="blogs">
@@ -35,3 +35,4 @@
         <a href="" (click)="viewMore(); $event.preventDefault()" *ngIf="blogsToShow<blogs.length">View more >></a>
     </div>
 </div>
+<app-recipe-container [title]="'Explore Recipes'"></app-recipe-container>
