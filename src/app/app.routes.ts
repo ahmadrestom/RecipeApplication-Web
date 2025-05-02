@@ -3,6 +3,7 @@ import { LandingComponent } from './Pages/landing/landing.component';
 import { AuthenticationComponent } from './Pages/authentication/authentication.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { authGuard } from './core/guards/auth.guard';
+import { RecipeComponent } from './Pages/recipe/recipe.component';
 
 export const routes: Routes = [
     {path:'', component: LandingComponent},
@@ -11,5 +12,7 @@ export const routes: Routes = [
         path:'home', 
         component: HomeComponent,
         canActivate: [authGuard]
-    }
+    },
+    {path: 'recipe/:id', component: RecipeComponent}
+
 ];

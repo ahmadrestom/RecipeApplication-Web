@@ -5,6 +5,16 @@
     margin: 5px 90px;
 }
 
+.clickable-card{
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+  
+    &:hover {
+      box-shadow: 0 0 10px rgba(18, 149, 117,0.6);
+    }
+  }
+
 .recipes{
     width: 100%;
     display: grid;
@@ -25,4 +35,3 @@
         font-size: 1.2rem;
     }
 }
-

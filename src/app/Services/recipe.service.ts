@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class RecipeService {
   private recentRecipesUrl = `${privateUrl}/recipe/getRecentRecipes`;
   private recipesUrl = `${privateUrl}/recipe/getAllRecipes`;
+  private recipeById = `${privateUrl}/recipe/getRecipeById`
 
   constructor(private http: HttpClient){}
 
@@ -19,5 +20,9 @@ export class RecipeService {
 
   getRecipes():Observable<Recipe[]>{
     return this.http.get<Recipe[]>(this.recipesUrl);
+  }
+
+  getRecipeById(id:string):Observable<Recipe>{
+    return this.http.get<Recipe>(`${this.recipeById}/${id}`);
   }
 }
