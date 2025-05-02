@@ -90,21 +90,20 @@ app-rating-card{
     margin: 10px 50px;
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items:center;    
+}
 
-    .view-more-container {
-        width: 95%;
-        display: flex;
-        justify-content: flex-end;
-        
-        a {
-            text-decoration: none;
-            color: rgb(18, 149, 117, 1);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-    }
+.view-more-container {
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
     
+    a {
+        text-decoration: none;
+        color: rgb(18, 149, 117, 1);
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
 }
 
 .blogs{
@@ -112,4 +111,20 @@ app-rating-card{
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     margin: 20px;
+}
+
+.home-categories{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 20px;
+}
+
+.brands{
+    display: flex;
+    flex-direction: row;
+    gap: 6%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 160px;
 }

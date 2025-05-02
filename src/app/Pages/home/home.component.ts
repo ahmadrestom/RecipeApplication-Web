@@ -8,18 +8,28 @@ import { BlogCardComponent } from '../../Components/blog-card/blog-card.componen
 import { CommonModule } from '@angular/common';
 import { RecipeContainerComponent } from '../../Components/recipe-container/recipe-container.component';
 import { NewSettlerComponent } from '../../Components/new-settler/new-settler.component';
+import { Category } from '../../Models/category';
+import { CategoryService } from '../../Services/category.service';
+import { HomeCategoriesComponent } from "../../Components/Home-category-card/home-categories.component";
+import { PexelsService } from '../../Services/PexelsService/pexels.service';
+import { PexelsResponse } from '../../Models/PexelsResponse';
+import { BrandsComponent } from '../../Components/brands/brands.component';
+import { FooterComponent } from '../../Components/footer/footer.component';
 
 @Component({
   selector: 'app-home',
   imports: [
-    HeaderComponent, 
-    RatingCardComponent, 
-    ButtonComponent, 
-    BlogCardComponent, 
+    HeaderComponent,
+    RatingCardComponent,
+    ButtonComponent,
+    BlogCardComponent,
     CommonModule,
     RecipeContainerComponent,
-    NewSettlerComponent
-  ],
+    NewSettlerComponent,
+    HomeCategoriesComponent,
+    BrandsComponent,
+    FooterComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -30,10 +40,58 @@ export class HomeComponent implements OnInit {
   blogsToShow = 2;
   increment = 2;
 
-  constructor(private blogService: BlogService) {};
+  categories: Category[] = [];
+  visibileCategories: Category[] = [];
+  categoriesToShow = 4;
+
+  categoryImages: {[key:string]: string} = {};
+
+  brands: string[] = [
+    'assets/Brands/amazon.svg',
+    'assets/Brands/apple.svg',
+    'assets/Brands/carrefour.svg',
+    'assets/Brands/cocacola.svg',
+    'assets/Brands/google.svg',
+    'assets/Brands/walmart.svg'
+  ];
+  
+
+  constructor(
+    private blogService: BlogService, 
+    private categoryService:CategoryService,
+    private pexelsService: PexelsService
+  ) {};
 
   ngOnInit() {
     this.getBlogs();
+    this.getCategories();
+  }
+
+  getCategories(): void{
+    this.categoryService.getAllCategories().subscribe({
+      next: (data) => {
+        this.categories = data;
+        this.visibileCategories = this.categories.slice(0, this.categoriesToShow);
+        this.getImages();
+      },
+      error: (error) => {
+        console.error('Error fetching categories: ', error);
+      }
+    });    
+  }
+
+  viewMoreCategories():void{
+    this.categoriesToShow+=this.increment;
+    this.visibileCategories = this.categories.slice(0, this.categoriesToShow);
+  }
+
+  getImages():void{
+    this.categories.forEach(category => {
+      this.pexelsService.searchImages(category.category_name,1).subscribe((data: PexelsResponse)=>{
+        console.log(`Image for ${category.category_name}: xx`);
+        this.categoryImages[category.category_name] = data.photos[0]?.src.medium;
+      });
+    }); 
   }
 
   getBlogs(): void {

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { HeaderComponent } from '../../Components/header/header.component';
-import { CategoryCardComponent } from '../../Components/category-card/category-card.component';
+import { CategoryCardComponent } from '../../Components/Landing-category-card/category-card.component';
+
 
 @Component({
   selector: 'app-landing',
