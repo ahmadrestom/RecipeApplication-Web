@@ -13,5 +13,4 @@ export class RecipeHeaderComponent {
   @Input() recipe: Recipe | null = null;
   stars: number[] = [1, 2, 3, 4, 5];
   @Input() rating: number=0;
-
 }

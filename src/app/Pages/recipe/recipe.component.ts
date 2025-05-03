@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../../Models/recipe';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../../Services/recipe.service';
@@ -16,7 +16,7 @@ import { FooterComponent } from '../../Components/footer/footer.component';
      RecipeHeaderComponent,
      MainDivComponent,
      SideDivComponent,
-     FooterComponent
+     FooterComponent,
     ],
   templateUrl: './recipe.component.html',
   styleUrl: './recipe.component.scss'
