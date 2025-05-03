@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Recipe } from '../../Models/recipe';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../../Services/recipe.service';
+import { HeaderComponent } from '../../Components/header/header.component';
+import { CommonModule } from '@angular/common';
+import { RecipeHeaderComponent } from '../../Components/Recipe-Components/recipe-header/recipe-header.component';
 
 @Component({
   selector: 'app-recipe',
-  imports: [],
+  imports: [HeaderComponent, CommonModule,RecipeHeaderComponent],
   templateUrl: './recipe.component.html',
   styleUrl: './recipe.component.scss'
 })
@@ -25,5 +28,4 @@ export class RecipeComponent implements OnInit{
       this.recipe = data;
     });
   }
-
 }
