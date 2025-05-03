@@ -67,6 +67,13 @@
                     background-color: rgba(18, 149, 117, 1);
                     color: white;
                 }
+                svg path {
+                    transition: stroke 0.3s;
+                  }
+                
+                  &:hover svg path {
+                    stroke: white;
+                  }
             }
         }
 
@@ -75,5 +82,10 @@
             white-space: normal;
             word-wrap: break-word;
         }
+    }
+}
+@media print{
+    *{
+        display: none;
     }
 }

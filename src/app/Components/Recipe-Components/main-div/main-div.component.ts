@@ -12,4 +12,7 @@ import { PrintRecipeComponent } from '../print-recipe/print-recipe.component';
 })
 export class MainDivComponent {
   @Input() recipe!: Recipe;
+  printRecipe() {
+    window.print();
+  }
 }

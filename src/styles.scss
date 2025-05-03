@@ -5,3 +5,22 @@ body, html{
     padding: 0;
     //overflow: hidden;
 }
+
+@media print{
+    body *{
+        visibility: hidden;
+    }
+    .printArea,
+    .printArea *
+    {
+        visibility: visible;
+    }
+    body{
+        visibility: visible;
+        display: block;
+    }
+    @page {
+    size: auto;
+    margin: 0;
+  }
+}
