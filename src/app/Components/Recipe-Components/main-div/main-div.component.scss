@@ -1,0 +1,79 @@
+:host {
+    flex: 3;
+
+    .container {
+        img {
+            width: 90%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .time {
+            padding-top: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 50px;
+
+            hr {
+                width: 1px;
+                height: 20px;
+                background-color: gray;
+                opacity: 0.4;
+                border: none;
+            }
+
+            p {
+                display: inline;
+                margin: 0;
+                text-align: center;
+            }
+
+            .time-block {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                p {
+                    &:last-child {
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            .divider {
+                width: 1px;
+                height: 30px;
+                background-color: gray;
+                opacity: 0.4;
+            }
+
+            button {
+                cursor: pointer;
+                padding: 10px 20px;
+                border-radius: 7px;
+                background-color: transparent;
+                border-color: rgba(18, 149, 117, 1);
+                color: rgba(18, 149, 117, 1);
+                display: flex;
+                flex-direction: row;
+                gap: 9px;
+                align-items: center;
+                justify-content: center;
+
+                &:hover {
+                    background-color: rgba(18, 149, 117, 1);
+                    color: white;
+                }
+            }
+        }
+
+        .recipe-description {
+            width: 67ch;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+    }
+}

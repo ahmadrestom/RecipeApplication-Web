@@ -1,5 +1,11 @@
-<app-header></app-header>
-<p>Home &rarr; Recipe &rarr; {{recipe?.recipeName}}</p>
-<app-recipe-header [recipe]="this.recipe!"></app-recipe-header>
-<hr>
-
+<div class="container">
+    <app-header></app-header>
+    <p>Home &rarr; Recipe &rarr; {{recipe?.recipeName}}</p>
+    <app-recipe-header [recipe]="this.recipe!"></app-recipe-header>
+    <hr>
+    <div class="divs">
+        <app-main-div [recipe]="recipe!"></app-main-div>
+        <app-side-div [recipe]="recipe!"></app-side-div>
+    </div>
+</div>
+<app-footer></app-footer>

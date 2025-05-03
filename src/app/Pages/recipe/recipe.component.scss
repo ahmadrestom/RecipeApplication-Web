@@ -1,4 +1,4 @@
-:host{
+.container{
     display: block;
     margin: 0 100px;
 
@@ -9,5 +9,13 @@
         margin-top: 30px;
     }
 
+    .divs{
+        display: flex;
+        flex-direction: row;
+        margin-top: 30px;
+    }
+
 }
-    
+app-footer{
+    margin-top: 20px;
+}    
