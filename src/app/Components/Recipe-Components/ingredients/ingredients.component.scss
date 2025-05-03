@@ -1,0 +1,26 @@
+.ingredient {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;    
+    .square {
+        width: 15px;
+        height: 15px;
+        background-color: rgb(18, 149, 117, 0.7);
+        border: 3px solid rgb(18, 149, 117, 1);
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    p{
+        margin: 7px;
+    }
+    .name-grams{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        span{
+            color: rgb(18, 149, 117, 1);
+        }
+    }
+}
