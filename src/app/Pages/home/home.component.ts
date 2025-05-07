@@ -15,6 +15,7 @@ import { PexelsService } from '../../Services/PexelsService/pexels.service';
 import { PexelsResponse } from '../../Models/PexelsResponse';
 import { BrandsComponent } from '../../Components/brands/brands.component';
 import { FooterComponent } from '../../Components/footer/footer.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -35,7 +36,6 @@ import { FooterComponent } from '../../Components/footer/footer.component';
 })
 export class HomeComponent implements OnInit {
 
-  blogs: Blog[] = [];
   visibleBlogs: Blog[] = [];
   blogsToShow = 2;
   increment = 2;
@@ -59,7 +59,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private blogService: BlogService, 
     private categoryService:CategoryService,
-    private pexelsService: PexelsService
+    private pexelsService: PexelsService,
+    private router: Router
   ) {};
 
   ngOnInit() {
@@ -95,10 +96,9 @@ export class HomeComponent implements OnInit {
   }
 
   getBlogs(): void {
-    this.blogService.getLatestBlogs().subscribe(
+    this.blogService.getLatestBlogs(2).subscribe(
       (blogs) => {
-        this.blogs = blogs;
-        this.visibleBlogs = this.blogs.slice(0, this.blogsToShow);
+        this.visibleBlogs = blogs;
       },
       (error) => {
         console.error('Error, cannot fetch blogs', error);
@@ -106,7 +106,6 @@ export class HomeComponent implements OnInit {
     )
   }
   viewMore(): void {
-    this.blogsToShow += this.increment;
-    this.visibleBlogs = this.blogs.slice(0, this.blogsToShow);
+    this.router.navigate(['/blogs']);    
   }
 }

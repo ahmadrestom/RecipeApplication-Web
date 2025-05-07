@@ -32,7 +32,7 @@
         <app-blog-card *ngFor="let blog of visibleBlogs" [blog]="blog"></app-blog-card>
     </div>
     <div class="view-more-container">
-        <a href="" (click)="viewMore(); $event.preventDefault()" *ngIf="blogsToShow<blogs.length">View more >></a>
+        <a href="" (click)="viewMore(); $event.preventDefault()">View more >></a>
     </div>
 </div>
 <app-recipe-container [title]="'Explore Recipes'"></app-recipe-container>

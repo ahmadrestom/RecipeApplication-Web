@@ -6,4 +6,7 @@ button{
     color: white;
     font-size: 1.1rem;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    &:hover{
+        cursor: pointer;
+    }
 }

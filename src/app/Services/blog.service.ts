@@ -9,12 +9,13 @@ import { Blog } from '../Models/blog';
 })
 export class BlogService {
 
-  private apiUrl = `https://newsapi.org/v2/everything?q=healthy%20food%20recipe%20nutrition&from=2025-04-10&sortBy=publishedAt&apiKey=${environment.apiKey}&pageSize=8`;
+  private apiUrl = `https://newsapi.org/v2/everything?q=healthy%20food%20recipe%20nutrition&from=2025-04-10&sortBy=publishedAt&apiKey=${environment.apiKey}`;
 
   constructor(private http: HttpClient) { }
 
-  getLatestBlogs(): Observable<any> {
-    return this.http.get<any>(this.apiUrl).pipe(
+  getLatestBlogs(pageSize: number): Observable<any> {
+    const url = `${this.apiUrl}&pageSize=${pageSize}`;
+    return this.http.get<any>(url).pipe(
       map(response => response.articles.map((article: any) => new Blog(
         article.author,
         article.title,
