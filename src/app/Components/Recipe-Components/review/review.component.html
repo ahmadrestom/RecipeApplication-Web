@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="user">
+        <div class="img">
+            <img [src]="review.user.imageUrl" (error)="onImgError($event)" alt="">
+        </div>
+        <div class="name-time">
+            <p>{{review.user.firstName}} {{review.user.lastName}}</p>
+            <p *ngIf="review.timeUploaded">{{review.timeUploaded | timeAgo}}</p>
+        </div>
+    </div>
+    <div class="review">
+        <p>{{review.text}}</p>        
+    </div>
+</div>

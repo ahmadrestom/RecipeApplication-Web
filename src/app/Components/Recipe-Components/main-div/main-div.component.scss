@@ -83,6 +83,14 @@
             word-wrap: break-word;
         }
     }
+    .reviews-hr{
+        height: 10px;
+        width: 70%;
+        margin-left: 0;
+        font-weight: bold;
+        background-color: rgba(18, 149, 117, 1);
+    }
+
 }
 @media print{
     *{
