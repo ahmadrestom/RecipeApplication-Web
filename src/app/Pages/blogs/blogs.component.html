@@ -1,16 +1,12 @@
 <app-header></app-header>
 <h1>Blogs</h1>
 <div class="blogs-container">
-    <app-blog-card *ngFor="let blog of blogs" [blog]="blog"></app-blog-card>
+    <app-blog-card  *ngFor="let blog of blogs"   [blog]="blog"></app-blog-card>
 </div>
 
 <div class="pagination">
-    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Prev</button>
-
-    <button *ngFor="let page of [1,2,3,4,5]" (click)="goToPage(page)" [class.active]="currentPage === page">
-        {{ page }}
-    </button>
-
-    <button (click)="goToPage(currentPage + 1)">Next</button>
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">←</button>
+    <span>{{currentPage}}</span>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage ===9">→</button>
 </div>
 <app-footer></app-footer>

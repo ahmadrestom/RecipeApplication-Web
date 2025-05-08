@@ -15,7 +15,7 @@ import { FooterComponent } from '../../Components/footer/footer.component';
 export class BlogsComponent implements OnInit{
   blogs: Blog[] = [];
   currentPage = 1;
-  blogPerPage = 9; 
+  blogPerPage = 10; 
   constructor(private blogService: BlogService){};
 
   ngOnInit(): void {

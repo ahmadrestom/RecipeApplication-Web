@@ -1,11 +1,13 @@
-<div (click)="goToUrl()">
+<div class="card" (click)="goToUrl()">
     <div class="blog-image">
-        <img [src]="blog?.urlToImage" alt="">
-        <h2>{{blog?.title}}</h2>
-        <p>{{blog?.description}}</p>
+        <img [src]="blog?.urlToImage" alt="Blog image" />
     </div>
-    <div class="blog-author-date">
-        <span>By: {{blog?.author}}</span>
-        <span>{{formattedDate}}</span>
+    <div class="content">
+        <h2>{{ blog?.title }}</h2>
+        <p>{{blog?.description }}</p>
+        <div class="blog-author-date">
+            <span>By: {{ blog?.author }}</span>
+            <span>{{ formattedDate }}</span>
+        </div>
     </div>
 </div>

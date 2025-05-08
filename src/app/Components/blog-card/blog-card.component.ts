@@ -10,6 +10,7 @@ import { Blog } from '../../Models/blog';
 export class BlogCardComponent {
 
   @Input() blog: Blog | null = null;
+   
 
   goToUrl():void{
     window.open(this.blog?.url, '_blank');
