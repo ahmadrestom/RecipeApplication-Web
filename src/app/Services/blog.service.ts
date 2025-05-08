@@ -13,8 +13,8 @@ export class BlogService {
 
   constructor(private http: HttpClient) { }
 
-  getLatestBlogs(pageSize: number): Observable<any> {
-    const url = `${this.apiUrl}&pageSize=${pageSize}`;
+  getLatestBlogs(pageSize: number, page:number): Observable<any> {
+    const url = `${this.apiUrl}&pageSize=${pageSize}&page=${page}`;
     return this.http.get<any>(url).pipe(
       map(response => response.articles.map((article: any) => new Blog(
         article.author,

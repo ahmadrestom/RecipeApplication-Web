@@ -1,0 +1,27 @@
+:host{
+    display: block;
+    h1{
+        padding-left: 7%;
+        margin-top: 100px;
+    }    
+
+    .blogs-container{
+        display: grid;
+        margin: 0 auto;
+        width: 90%;        
+        
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+
+        app-blog-card:first-child {
+            grid-column: span 2;
+            margin-bottom: 100px;
+          }
+    }
+    .pagination{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+}

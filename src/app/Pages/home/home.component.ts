@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
   }
 
   getBlogs(): void {
-    this.blogService.getLatestBlogs(2).subscribe(
+    this.blogService.getLatestBlogs(2,1).subscribe(
       (blogs) => {
         this.visibleBlogs = blogs;
       },
@@ -106,6 +106,13 @@ export class HomeComponent implements OnInit {
     )
   }
   viewMore(): void {
-    this.router.navigate(['/blogs']);    
+    if (this.router.url === '/blogs') {
+      // Force reload by navigating to the same route with a trick
+      this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
+        this.router.navigate(['/blogs']);
+      });
+    } else {
+      this.router.navigate(['/blogs']);
+    }
   }
 }
