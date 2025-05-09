@@ -3,6 +3,9 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { LandingPageButtonsComponent } from '../landing-page-buttons/landing-page-buttons.component';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { User } from '../../Models/user';
+import { AuthServiceService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +15,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  user$ :Observable<User|null>;
   searchExpanded = false;
-  constructor(private router: Router){};
+  constructor(private router: Router, private authService: AuthServiceService){
+    this.user$ = this.authService.user$;
+  };
 
   get isLandingPage(): boolean {
     return this.router.url === '/';
@@ -23,7 +29,6 @@ toggleSearch() {
 }
 
 collapseSearch() {
-  // optional: delay a bit so user doesn't lose focus immediately
   setTimeout(() => this.searchExpanded = false, 200);
 }
 }

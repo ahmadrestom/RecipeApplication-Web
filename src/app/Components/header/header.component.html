@@ -1,22 +1,19 @@
 <header class="header">
-    <h1>
-        <img src="assets/icons/chef.png" alt="Chef Hat" class="chef-icon" />
-        TasteCraft
-    </h1>
-    <app-nav-bar></app-nav-bar>
-    <app-landing-page-buttons *ngIf="isLandingPage"></app-landing-page-buttons>
+  <h1>
+    <img src="assets/icons/chef.png" alt="Chef Hat" class="chef-icon" />
+    TasteCraft
+  </h1>
+  <app-nav-bar></app-nav-bar>
+  <app-landing-page-buttons *ngIf="isLandingPage"></app-landing-page-buttons>
 
-    <div *ngIf="!isLandingPage" class="home-controls">
-        <div class="search-wrapper" [class.expanded]="searchExpanded">
-            <i class="fas fa-search search-icon" (click)="toggleSearch()"></i>
-            <input
-              *ngIf="searchExpanded"
-              type="text"
-              placeholder="Search..."
-              class="search-input"
-              (blur)="collapseSearch()"
-            />
-          </div>
-        <img src="assets/home-image.png" alt="Profile" class="profile-pic" />
-      </div>
+  <div *ngIf="!isLandingPage" class="home-controls">
+    <div class="search-wrapper" [class.expanded]="searchExpanded">
+      <i class="fas fa-search search-icon" (click)="toggleSearch()"></i>
+      <input *ngIf="searchExpanded" type="text" placeholder="Search..." class="search-input"
+        (blur)="collapseSearch()" />
+    </div>
+    <div *ngIf="user$ | async as user" class="img">
+      <img [src]="user?.imageUrl ? user.imageUrl : 'assets/icons/user.png'" alt="Profile" class="profile-pic" />
+    </div>
+  </div>
 </header>

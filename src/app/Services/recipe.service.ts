@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class RecipeService {
   private recentRecipesUrl = `${privateUrl}/recipe/getRecentRecipes`;
   private recipesUrl = `${privateUrl}/recipe/getAllRecipes`;
-  private recipeById = `${privateUrl}/recipe/getRecipeById`
+  private recipeById = `${privateUrl}/recipe/getRecipeById`;
 
   constructor(private http: HttpClient){}
 

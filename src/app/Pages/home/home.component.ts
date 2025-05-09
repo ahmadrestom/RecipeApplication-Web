@@ -16,6 +16,7 @@ import { PexelsResponse } from '../../Models/PexelsResponse';
 import { BrandsComponent } from '../../Components/brands/brands.component';
 import { FooterComponent } from '../../Components/footer/footer.component';
 import { Router } from '@angular/router';
+import { AuthServiceService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -60,13 +61,20 @@ export class HomeComponent implements OnInit {
     private blogService: BlogService, 
     private categoryService:CategoryService,
     private pexelsService: PexelsService,
-    private router: Router
+    private router: Router,
+    private authService: AuthServiceService
+
   ) {};
 
   ngOnInit() {
     this.getBlogs();
     this.getCategories();
   }
+
+  logout(): void{
+    this.authService.logout();
+  }
+
 
   getCategories(): void{
     this.categoryService.getAllCategories().subscribe({
@@ -107,7 +115,6 @@ export class HomeComponent implements OnInit {
   }
   viewMore(): void {
     if (this.router.url === '/blogs') {
-      // Force reload by navigating to the same route with a trick
       this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
         this.router.navigate(['/blogs']);
       });
