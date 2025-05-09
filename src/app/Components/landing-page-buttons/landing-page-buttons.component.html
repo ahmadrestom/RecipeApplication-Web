@@ -1,10 +1,11 @@
 <div class="btn-div">
-    <button (click)="goToAuth('signup')" class="btn signup-btn">
+    <a routerLink="/auth" [queryParams]="{mode: 'signup'}" class="btn signup-btn">
         <i class="bi bi-person-lines-fill"></i>
-        signup
-    </button>
-    <button (click)="goToAuth('login')" class="btn login-btn">
+        Sign Up
+    </a>
+
+    <a routerLink="/auth" [queryParams]="{mode: 'login'}" class="btn login-btn">
         <i class="bi bi-box-arrow-in-right"></i>
         login
-    </button>
+    </a>
 </div>
