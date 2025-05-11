@@ -5,6 +5,7 @@ import { HomeComponent } from './Pages/home/home.component';
 import { authGuard } from './core/guards/auth.guard';
 import { RecipeComponent } from './Pages/recipe/recipe.component';
 import { BlogsComponent } from './Pages/blogs/blogs.component';
+import { CreateRecipeComponent } from './Pages/create-recipe/create-recipe.component';
 
 export const routes: Routes = [
     {path:'', component: LandingComponent},
@@ -15,6 +16,7 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {path: 'recipe/:id', component: RecipeComponent},
-    {path: 'blogs', component: BlogsComponent}
+    {path: 'blogs', component: BlogsComponent},
+    {path: 'create-recipe', component: CreateRecipeComponent}
 
 ];

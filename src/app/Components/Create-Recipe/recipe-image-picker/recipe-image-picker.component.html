@@ -1,0 +1,19 @@
+<div class="image-upload-box" (click)="fileInput.click()">
+  <input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput hidden>
+
+  <ng-container *ngIf="imagePreview; else showIcon">
+    <div class="image-controls">
+      <button type="button" (click)="fileInput.click(); $event.stopPropagation()">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+      <button type="button" >
+        <i class="bi bi-trash-fill"></i>
+      </button>
+    </div>
+    <img [src]="imagePreview" alt="Preview" class="preview-image"/>
+  </ng-container>
+
+  <ng-template #showIcon>
+    <i class="bi bi-camera-fill"></i>
+  </ng-template>
+</div>
