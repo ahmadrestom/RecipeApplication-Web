@@ -15,5 +15,4 @@ export class ReviewComponent {
   onImgError(event: Event) {
     (event.target as HTMLImageElement).src = 'assets/icons/user.png';
   }
-
 }

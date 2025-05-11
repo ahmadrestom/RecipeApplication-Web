@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RecipeCardComponent } from '../recipe-card/recipe-card.component';
 import { RecipeService } from '../../Services/recipe.service';
 import { Recipe } from '../../Models/recipe';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -16,7 +16,6 @@ export class RecipeContainerComponent implements OnInit{
   constructor(private recipeService: RecipeService){};
 
   @Input() title:string = '';
-  @Input() layoutType: 'grid' | 'list' = 'grid';
 
 
   recipes: Recipe[] = [];
@@ -58,6 +57,11 @@ export class RecipeContainerComponent implements OnInit{
   viewMoreRecentRecipes(): void{
     this.recentRecipesToShow += this.incrementr;
     this.visibleRecentRecipes = this.recentRecipes.slice(0, this.recentRecipesToShow);
+  }
+
+  shouldShowViewMore() {
+    return (this.title === 'Explore Recipes' && this.recipesToShow < this.recipes.length) ||
+           (this.title === 'Trending Recipes' && this.recentRecipesToShow < this.recentRecipes.length);
   }
 
   preloadImages(recipes: Recipe[]): void {

@@ -9,8 +9,7 @@
 </div>
 <div class="view-more-container">
     <a href="" (click)="title === 'Explore Recipes' ? viewMoreRecipes() : viewMoreRecentRecipes();
-     $event.preventDefault()" *ngIf="(title === 'Explore Recipes' && recipesToShow < recipes.length) ||
-          (title === 'Trending Recipes' && recentRecipesToShow < recentRecipes.length)">
+     $event.preventDefault()" *ngIf="shouldShowViewMore()">
         View more >>
     </a>
 </div>

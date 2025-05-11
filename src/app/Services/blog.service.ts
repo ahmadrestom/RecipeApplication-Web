@@ -20,12 +20,12 @@ export class BlogService {
     const url = `https://newsapi.org/v2/everything?q=healthy%20food%20recipe%20nutrition&from=${fromDate}&sortBy=publishedAt&pageSize=${pageSize}&page=${page}&apiKey=${environment.apiKey}`;
     return this.http.get<any>(url).pipe(
       map(response => response.articles.map((article: any) => new Blog(
-        article.author,
+        article.author || 'Unknown',
         article.title,
         article.description,
         article.url,
         article.urlToImage,
-        new Date(article.publishedAt),
+        new Date(article.publishedAt) || 'Unknown',
         article.content
       )))
     );

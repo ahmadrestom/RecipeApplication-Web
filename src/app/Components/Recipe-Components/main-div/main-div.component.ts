@@ -14,7 +14,7 @@ import { ReviewsComponent } from '../reviews/reviews.component';
   templateUrl: './main-div.component.html',
   styleUrl: './main-div.component.scss'
 })
-export class MainDivComponent{
+export class MainDivComponent implements OnInit{
   reviews: Review[] = [];
   constructor(private reviewsService: ReviewService) { }
   private _recipe!: Recipe;
@@ -23,18 +23,25 @@ export class MainDivComponent{
   set recipe(value: Recipe) {
     this._recipe = value;
     if (this._recipe?.recipeId) {
-      this.fetchReviews(this._recipe.recipeId);
+      this.fetchReviews();
     }
+  }
+
+  ngOnInit(): void {
+      this.reviewsService.getRecipeReviews(this.recipe.recipeId);this.fetchReviews();
+      
   }
 
   get recipe(): Recipe {
     return this._recipe;
   }
 
-  fetchReviews(recipeId: string): void {
-    this.reviewsService.getRecipeReviews(recipeId).subscribe(reviews => {
-      this.reviews = reviews;
-    });
+  fetchReviews(): void {
+    this.reviewsService.reviews$.subscribe(reviews=>{
+      if(reviews){
+        this.reviews = reviews;
+      }
+    })
   }
 
 

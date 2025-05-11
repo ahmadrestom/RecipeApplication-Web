@@ -7,7 +7,7 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-side-div',
-  imports: [NiComponent,RecipeContainerComponent,NgClass],
+  imports: [NiComponent],
   templateUrl: './side-div.component.html',
   styleUrl: './side-div.component.scss'
 })
