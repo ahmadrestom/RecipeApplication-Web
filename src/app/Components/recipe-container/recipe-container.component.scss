@@ -1,33 +1,34 @@
-:host{
+:host {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 5px 90px;
 }
 
-.clickable-card{
+.clickable-card {
     cursor: pointer;
     text-decoration: none;
     display: block;
-  
-    &:hover {
-      box-shadow: 0 0 10px rgba(18, 149, 117,0.6);
-    }
-  }
 
-.recipes{
+    &:hover {
+        box-shadow: 0 0 10px rgba(18, 149, 117, 0.6);
+    }
+}
+
+.recipes {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    
+
 }
+
 .view-more-container {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     margin-top: 30px;
-    
+
     a {
         text-decoration: none;
         color: rgb(18, 149, 117, 1);

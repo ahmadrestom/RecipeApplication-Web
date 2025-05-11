@@ -8,13 +8,16 @@ import { Blog } from '../Models/blog';
   providedIn: 'root'
 })
 export class BlogService {
-
-  private apiUrl = `https://newsapi.org/v2/everything?q=healthy%20food%20recipe%20nutrition&from=2025-04-10&sortBy=publishedAt&apiKey=${environment.apiKey}`;
-
+  
   constructor(private http: HttpClient) { }
 
   getLatestBlogs(pageSize: number, page:number): Observable<any> {
-    const url = `${this.apiUrl}&pageSize=${pageSize}&page=${page}`;
+    const today = new Date();
+    const thirtyDaysAgo = new Date(today);
+    thirtyDaysAgo.setDate(today.getDate() - 30);
+    const fromDate = thirtyDaysAgo.toISOString().split('T')[0];
+
+    const url = `https://newsapi.org/v2/everything?q=healthy%20food%20recipe%20nutrition&from=${fromDate}&sortBy=publishedAt&pageSize=${pageSize}&page=${page}&apiKey=${environment.apiKey}`;
     return this.http.get<any>(url).pipe(
       map(response => response.articles.map((article: any) => new Blog(
         article.author,

@@ -16,6 +16,8 @@ export class RecipeContainerComponent implements OnInit{
   constructor(private recipeService: RecipeService){};
 
   @Input() title:string = '';
+  @Input() layoutType: 'grid' | 'list' = 'grid';
+
 
   recipes: Recipe[] = [];
   visibleRecipes: Recipe[] = [];
@@ -29,8 +31,24 @@ export class RecipeContainerComponent implements OnInit{
   loadingStates: { [recipeId: string]: boolean } = {};
 
   ngOnInit(): void {
-    this.fetchRecentRecipes();
-    this.fetchRecipes();
+    this.recipeService.getRecipes();
+    this.recipeService.getRecentRecipes();
+
+    this.recipeService.recipes$.subscribe(recipes => {
+      if (recipes) {
+        this.recipes = recipes;
+        this.visibleRecipes = this.recipes.slice(0, this.recipesToShow);
+        this.preloadImages(this.recipes);
+      }
+    });
+
+    this.recipeService.recentRecipes$.subscribe(recentRecipes => {
+      if (recentRecipes) {
+        this.recentRecipes = recentRecipes;
+        this.visibleRecentRecipes = this.recentRecipes.slice(0, this.recentRecipesToShow);
+        this.preloadImages(this.recentRecipes);
+      }
+    });
   }
 
   viewMoreRecipes(): void {
@@ -42,30 +60,6 @@ export class RecipeContainerComponent implements OnInit{
     this.visibleRecentRecipes = this.recentRecipes.slice(0, this.recentRecipesToShow);
   }
 
-  fetchRecipes(): void {
-    this.recipeService.getRecipes().subscribe({
-      next: (data) => {
-        this.recipes = data;
-        this.visibleRecipes = this.recipes.slice(0, this.recipesToShow);
-        this.preloadImages(this.recipes);
-      },
-      error: (error) => {
-        console.error('Error fetching recipes:xx ', error);
-      }
-    })
-  }
-  fetchRecentRecipes(): void {
-    this.recipeService.getRecentRecipes().subscribe({
-      next: (data) => {
-        this.recentRecipes = data;
-        this.visibleRecentRecipes = this.recentRecipes.slice(0, this.recipesToShow);
-        this.preloadImages(this.recentRecipes);
-      },
-      error: (error) => {
-        console.error('Error fetching recipes: ', error);
-      }
-    })
-  }
   preloadImages(recipes: Recipe[]): void {
     recipes.forEach(recipe => {
       this.loadingStates[recipe.recipeId] = true;

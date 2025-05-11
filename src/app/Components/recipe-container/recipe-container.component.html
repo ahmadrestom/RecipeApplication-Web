@@ -1,10 +1,11 @@
 <h1>{{title}}</h1>
-<div class="recipes" *ngIf="title=== 'Explore Recipes'">
-    <app-recipe-card *ngFor="let i of visibleRecipes" [recipe]="i" [routerLink]="['/recipe', i.recipeId]" class="clickable-card">
+<div class="recipes">
+    <app-recipe-card 
+    *ngFor="let i of title === 'Explore Recipes' ? visibleRecipes : visibleRecentRecipes" 
+    [recipe]="i" 
+    [routerLink]="['/recipe', i.recipeId]" 
+    class="clickable-card">
     </app-recipe-card>
-</div>
-<div class="recipes" *ngIf="title=== 'Trending Recipes'">
-    <app-recipe-card *ngFor="let i of visibleRecentRecipes" [recipe]="i" [routerLink]="['/recipe', i.recipeId]" class="clickable-card"></app-recipe-card>
 </div>
 <div class="view-more-container">
     <a href="" (click)="title === 'Explore Recipes' ? viewMoreRecipes() : viewMoreRecentRecipes();
