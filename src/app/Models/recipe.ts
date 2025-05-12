@@ -4,7 +4,7 @@ import { Instruction } from "./Instruction";
 import { NutritionInformation } from "./NutritionInformation";
 import { Review } from "./review";
 
-enum DifficultyLevel{
+export enum DifficultyLevel{
     Easy, Medium, Hard
 }
 
@@ -35,5 +35,19 @@ export interface Recipe {
     ingredients: Ingredient[];
     instructions: Instruction[];
     reviews: Review[];
-
+}
+export interface PostRecipeDTO {
+  recipeName: string;
+  description: string;
+  preparationTime: number;
+  cookingTime: number;
+  difficultyLevel: DifficultyLevel;
+  rating: number;
+  imageUrl: string;
+  plateImageUrl: string;
+  categoryId: string;
+  chefId: string;
+  ni: NutritionInformation;
+  ingredients: Ingredient[];
+  instructions: Instruction[];
 }

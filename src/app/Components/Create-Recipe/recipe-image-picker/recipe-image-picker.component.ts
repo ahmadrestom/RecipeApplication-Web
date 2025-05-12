@@ -20,5 +20,9 @@ export class RecipeImagePickerComponent {
       reader.readAsDataURL(file);
     }
   }
+  deleteImage(event: Event): void {
+  event.stopPropagation();
+  this.imagePreview = null;
+}
 
 }

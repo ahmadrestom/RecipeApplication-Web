@@ -1,10 +1,33 @@
 <form id="form">
     <div class="form-elemnt">
         <label for="">Recipe Title:</label>
-        <input type="text">
+        <input type="text" autocomplete="false" placeholder="Enter title">
     </div>
     <div class="form-elemnt">
         <label for="">Recipe Image</label>
         <recipe-image-picker></recipe-image-picker>
+    </div>
+    <div class="form-elemnt">
+        <label for="">Description</label>
+        <textarea rows="5" name="" id="" placeholder="Introduce your recipe..."></textarea>
+    </div>
+    <div class="form-elemnt">
+        <label for="category">Category</label>
+        <select id="category">
+            <option value="" disabled selected hidden>-- Select a category --</option>
+            <option *ngFor="let c of categories" value="">{{c.category_name}}</option>
+        </select>
+    </div>
+    <div class="form-elemnt">
+        <label for="">Plate Image</label>
+        <recipe-image-picker></recipe-image-picker>
+    </div>
+    <div class="form-elemnt">
+        <label for="">Preparation Time</label>
+        <input min="0" max="1200" type="number" autocomplete="false" placeholder="How long does it take to prepare this recipe? (mins)">
+    </div>
+    <div class="form-elemnt">
+        <label for="">Cooking Time</label>
+        <input min="0" max="1200" type="number" autocomplete="false" placeholder="How long does it take to cook this recipe? (mins)">
     </div>
 </form>
