@@ -39,8 +39,8 @@ export interface Recipe {
 export interface PostRecipeDTO {
   recipeName: string;
   description: string;
-  preparationTime: number;
-  cookingTime: number;
+  preparationTime: number | null;
+  cookingTime: number | null;
   difficultyLevel: DifficultyLevel;
   rating: number;
   imageUrl: string;

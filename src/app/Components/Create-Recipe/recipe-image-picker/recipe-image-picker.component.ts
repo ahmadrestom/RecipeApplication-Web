@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'recipe-image-picker',
@@ -8,7 +8,12 @@ import { Component } from '@angular/core';
   styleUrl: './recipe-image-picker.component.scss'
 })
 export class RecipeImagePickerComponent {
+  @Output() imageSelected = new EventEmitter<string>();
    imagePreview: string | null = null;
+
+   onImagePicked(imageUrl: string) {
+    this.imageSelected.emit(imageUrl); // call this when user picks image
+  }
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
@@ -16,6 +21,7 @@ export class RecipeImagePickerComponent {
       const reader = new FileReader();
       reader.onload = e => {
         this.imagePreview = (e.target as FileReader).result as string;
+        this.onImagePicked(this.imagePreview);
       };
       reader.readAsDataURL(file);
     }

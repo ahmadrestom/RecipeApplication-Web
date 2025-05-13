@@ -1,4 +1,4 @@
 export interface Instruction{
     instruction: string;
-    order:number;
+    order:number | null;
 }

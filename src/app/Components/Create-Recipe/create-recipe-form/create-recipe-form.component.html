@@ -1,33 +1,92 @@
 <form id="form">
     <div class="form-elemnt">
         <label for="">Recipe Title:</label>
-        <input type="text" autocomplete="false" placeholder="Enter title">
+        <input [(ngModel)]="recipe.recipeName" name="recipeName" type="text" autocomplete="false" placeholder="Enter title">
     </div>
     <div class="form-elemnt">
-        <label for="">Recipe Image</label>
-        <recipe-image-picker></recipe-image-picker>
+        <label for="">Recipe Image:</label>
+        <recipe-image-picker (imageSelected)="recipe.imageUrl = $event"></recipe-image-picker>
     </div>
     <div class="form-elemnt">
-        <label for="">Description</label>
-        <textarea rows="5" name="" id="" placeholder="Introduce your recipe..."></textarea>
+        <label for="">Description:</label>
+        <textarea name="description" [(ngModel)]="recipe.description" rows="5" name="" id="" placeholder="Introduce your recipe..."></textarea>
     </div>
     <div class="form-elemnt">
-        <label for="category">Category</label>
-        <select id="category">
+        <label for="category">Category:</label>
+        <select name="category" id="category" [(ngModel)]="recipe.categoryId">
             <option value="" disabled selected hidden>-- Select a category --</option>
-            <option *ngFor="let c of categories" value="">{{c.category_name}}</option>
+            <option *ngFor="let c of categories" [value]="c.category_id">{{c.category_name}}</option>
         </select>
     </div>
     <div class="form-elemnt">
-        <label for="">Plate Image</label>
-        <recipe-image-picker></recipe-image-picker>
+        <label for="difficultyLevel">Difficulty Level:</label>
+        <select id="difficultyLevel" name="difficultyLevel" [(ngModel)]="recipe.difficultyLevel">
+            <option value="" disabled selected hidden>-- Select a level --</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
     </div>
     <div class="form-elemnt">
-        <label for="">Preparation Time</label>
-        <input min="0" max="1200" type="number" autocomplete="false" placeholder="How long does it take to prepare this recipe? (mins)">
+        <label for="">Plate Image:</label>
+        <recipe-image-picker (imageSelected)="recipe.plateImageUrl = $event"></recipe-image-picker>
     </div>
     <div class="form-elemnt">
-        <label for="">Cooking Time</label>
-        <input min="0" max="1200" type="number" autocomplete="false" placeholder="How long does it take to cook this recipe? (mins)">
+        <label for="">Preparation Time:</label>
+        <input [(ngModel)]="recipe.preparationTime" name="preparationTime" min="0" max="1200" type="number" autocomplete="false" placeholder="How long does it take to prepare this recipe? (mins)">
+    </div>
+    <div class="form-elemnt">
+        <label for="">Cooking Time:</label>
+        <input [(ngModel)]="recipe.cookingTime" name="cookingTime" min="0" max="1200" type="number" autocomplete="false" placeholder="How long does it take to cook this recipe? (mins)">
+    </div>
+    <div class="form-elemnt ingredients-section">
+        <label>Ingredients:</label>
+        <div *ngFor="let ingredients of recipe.ingredients; let i = index" class="ingredient-row">
+            <input
+                type="text"
+                placeholder="Ingredient Name"
+                [(ngModel)]="recipe.ingredients[i].ingredientName"
+                name="ingredientName{{i}}"
+            />
+            <input
+                type="number"
+                placeholder="Grams"
+                [(ngModel)]="recipe.ingredients[i].grams"
+                name="ingredientGram{{i}}"
+                min="0"
+            />
+        </div>
+        <button type="button" class="add-btn" (click)="addIngredient()">
+            +
+        </button>
+    </div>
+    <div class="form-elemnt instructions-section">
+        <label>Instructions:</label> 
+        <div *ngFor="let step of recipe.instructions; let i = index" class="instruction-row">
+            <span class="step-label">Step{{i+1}}</span>
+            <input
+                type="text"
+                placeholder="Instruction {{i+1}}"
+                [(ngModel)]="recipe.instructions[i].instruction"
+                name="instruction{{i}}"        
+            />
+        </div>
+        <button type="button" class="add-btn" (click)="addInstruction()">
+            +
+        </button>
+    </div>
+    <div class="form-elemnt">
+        <label for="">Nutrition Facts:</label>
+        <input name="calories" min="0" type="number" placeholder="Calories" [(ngModel)]="recipe.ni.calories">
+        <input name="total_fat" min="0" type="number" placeholder="Total fat" [(ngModel)]="recipe.ni.total_fat">
+        <input name="cholesterol" min="0" type="number" placeholder="Cholesterol" [(ngModel)]="recipe.ni.cholesterol">
+        <input name="carbohydrates" min="0" type="number" placeholder="Carbohydrates" [(ngModel)]="recipe.ni.carbohydrates">
+        <input name="protein" min="0" type="number" placeholder="Protein" [(ngModel)]="recipe.ni.protein">
+        <input name="sugar" min="0" type="number" placeholder="Sugar" [(ngModel)]="recipe.ni.sugar">
+        <input name="sodium" min="0" type="number" placeholder="Sodium" [(ngModel)]="recipe.ni.sodium">
+        <input name="fiber" min="0" type="number" placeholder="Fiber" [(ngModel)]="recipe.ni.fiber">
+        <input name="zinc" min="0" type="number" placeholder="Zinc" [(ngModel)]="recipe.ni.zinc">
+        <input name="magnesium" min="0" type="number" placeholder="Magnesium" [(ngModel)]="recipe.ni.magnesium">
+        <input name="potassium" min="0" type="number" placeholder="Potassium" [(ngModel)]="recipe.ni.potassium">
     </div>
 </form>

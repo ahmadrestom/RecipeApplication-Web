@@ -1,4 +1,4 @@
 export interface Ingredient{
     ingredientName:string;
-    grams: number;
+    grams: number | null;
 }
