@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
 
   visibleBlogs: Blog[] = [];
   blogsToShow = 2;
-  increment = 2;
+  increment = 4;
 
   categories: Category[] = [];
   visibileCategories: Category[] = [];

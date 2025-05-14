@@ -12,12 +12,13 @@ export class ButtonComponent {
 
   @Input() text:string = '';
   @Input() route: string = '';
+  @Input() fragment?: string = '';
 
   constructor(private router: Router){}
 
   navigate(){
     if(this.route){
-      this.router.navigate([this.route]);
+      this.router.navigate([this.route], {fragment: this.fragment});
     }
   }
 

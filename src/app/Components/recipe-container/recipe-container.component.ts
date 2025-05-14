@@ -26,7 +26,6 @@ export class RecipeContainerComponent implements OnInit{
   recipesToShow = 3;
   increment = 3;
   recentRecipesToShow = 3;
-  incrementr = 2;
   loadingStates: { [recipeId: string]: boolean } = {};
 
   ngOnInit(): void {
@@ -55,7 +54,7 @@ export class RecipeContainerComponent implements OnInit{
     this.visibleRecipes = this.recipes.slice(0, this.recipesToShow);
   }
   viewMoreRecentRecipes(): void{
-    this.recentRecipesToShow += this.incrementr;
+    this.recentRecipesToShow += this.increment;
     this.visibleRecentRecipes = this.recentRecipes.slice(0, this.recentRecipesToShow);
   }
 
