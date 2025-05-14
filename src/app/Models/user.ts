@@ -10,3 +10,10 @@ export interface User {
     imageUrl:string;
     role:Role;
 }
+
+export interface SignUpModel{
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+}

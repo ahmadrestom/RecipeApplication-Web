@@ -1,42 +1,91 @@
 <div class="container">
-    <div class="img-side">
-      <img src="assets/signupform.jpg" alt="Signup Illustration" />
-    </div>
-  
-    <form class="form-side">
-      <h2>Create Your Account</h2>
-  
-      <div class="form-group">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
-        <input type="text" placeholder="First Name" />
-      </div>
-  
-      <div class="form-group">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
-        <input type="text" placeholder="Last Name" />
-      </div>
-  
-      <div class="form-group">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 4l-7 5-7-5V6l7 5 7-5v2z"/></svg>
-        <input type="email" placeholder="Email" />
-      </div>
-  
-      <div class="form-group">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 0 2-2v-2a2 2 0 0 0-4 0v2a2 2 0 0 0 2 2zm6-10V6a6 6 0 0 0-12 0v1H4v14h16V7h-2zm-2 0H8V6a4 4 0 0 1 8 0v1z"/></svg>
-        <input type="password" placeholder="Password" />
-      </div>
-  
-      <div class="form-group">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 0 2-2v-2a2 2 0 0 0-4 0v2a2 2 0 0 0 2 2zm6-10V6a6 6 0 0 0-12 0v1H4v14h16V7h-2zm-2 0H8V6a4 4 0 0 1 8 0v1z"/></svg>
-        <input type="password" placeholder="Repeat Password" />
-      </div>
-  
-      <button type="submit">
-        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/>
-          </svg>
-        Sign Up
-    </button>
-    </form>
+  <div class="img-side">
+    <img src="assets/signupform.jpg" alt="Signup Illustration" />
   </div>
-  
+
+  <form class="form-side" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <h2>Create Your Account</h2>
+    <div class="wrapper">
+      <div class="form-group">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path
+            d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+        </svg>
+        <input formControlName="firstName" type="text" placeholder="First Name" />
+      </div>
+      <div class="error-message" *ngIf="signUpForm.get('firstName')?.invalid && signUpForm.get('firstName')?.touched">
+        <small>First name is required</small>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="form-group">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path
+            d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+        </svg>
+        <input formControlName="lastName" type="text" placeholder="Last Name" />
+      </div>
+      <div class="error-message" *ngIf="signUpForm.get('lastName')?.invalid && signUpForm.get('lastName')?.touched">
+        <small>Last name is required</small>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="form-group">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path
+            d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 4l-7 5-7-5V6l7 5 7-5v2z" />
+        </svg>
+        <input formControlName="email" type="email" placeholder="Email" />
+      </div>
+      <div class="error-message" *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+        <small>Email is required</small>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="form-group">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path
+            d="M12 17a2 2 0 0 0 2-2v-2a2 2 0 0 0-4 0v2a2 2 0 0 0 2 2zm6-10V6a6 6 0 0 0-12 0v1H4v14h16V7h-2zm-2 0H8V6a4 4 0 0 1 8 0v1z" />
+        </svg>
+        <input formControlName="password" id="password" type="password" placeholder="Password" />
+      </div>
+
+      <div class="error-message" *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.invalid">
+        <small *ngIf="signUpForm.get('password')?.errors?.['required']">Password is required.</small>
+        <small *ngIf="signUpForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters
+          long.</small>
+        <small *ngIf="signUpForm.get('password')?.errors?.['pattern']">
+          Password must contain uppercase, lowercase, number, and special character.
+        </small>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="form-group">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path
+            d="M12 17a2 2 0 0 0 2-2v-2a2 2 0 0 0-4 0v2a2 2 0 0 0 2 2zm6-10V6a6 6 0 0 0-12 0v1H4v14h16V7h-2zm-2 0H8V6a4 4 0 0 1 8 0v1z" />
+        </svg>
+        <input formControlName="repeatPassword" type="password" placeholder="Repeat Password" />
+      </div>
+      <div class="error-message"
+        *ngIf="signUpForm.errors?.['passwordsMismatch'] && signUpForm.get('repeatPassword')?.touched">
+        <small>Passwords do not match.</small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="signUpForm.invalid || isLoading">
+      <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+          d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z" />
+      </svg>
+      <span>{{isLoading? 'Signing up...': 'Sign Up'}}</span>
+    </button>
+    <div *ngIf="errorMessage" class="errorMessage">
+      {{errorMessage}}
+    </div>
+  </form>
+</div>

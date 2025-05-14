@@ -9,7 +9,8 @@ import { User } from '../Models/user';
 export class AuthServiceService{
 
   private readonly authUrl = `${publicUrl}/auth/authenticate`;
-  private readonly userUrl = `${privateUrl}/user/getUser`
+  private readonly userUrl = `${privateUrl}/user/getUser`;
+  private readonly registerUrl = `${publicUrl}/auth/register`;
 
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   private userSubject = new BehaviorSubject<User | null>(null);
@@ -32,6 +33,14 @@ export class AuthServiceService{
           this.fetchUserData();
           this.router.navigate(['/home']);
         })
+    );
+  }
+
+  signup(firstName: string, lastName: string, email:string, password:string){
+    return this.http.post(this.registerUrl, {firstName, lastName, email, password}).pipe(
+      tap(() => {
+        this.router.navigate(['/auth'], { queryParams: { mode: 'login' } });
+      })      
     );
   }
 
