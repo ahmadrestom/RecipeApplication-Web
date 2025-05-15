@@ -2,7 +2,7 @@
     <h2>Nutrition Facts</h2>
     <div *ngFor="let n of ni | keyvalue">
         <div class="ni-container">
-            <span>{{n.key | capitalize}}</span>
+            <span>{{n.key | capitalize}}  ({{ map.get(n.key) || '' }})</span>
             <span>{{n.value}}</span>
         </div>
         <hr>
