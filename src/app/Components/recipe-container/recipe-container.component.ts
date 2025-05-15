@@ -3,7 +3,7 @@ import { RecipeCardComponent } from '../recipe-card/recipe-card.component';
 import { RecipeService } from '../../Services/recipe.service';
 import { Recipe } from '../../Models/recipe';
 import { CommonModule, NgClass } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-container',
@@ -13,14 +13,15 @@ import { RouterLink } from '@angular/router';
 })
 export class RecipeContainerComponent implements OnInit{
 
-  constructor(private recipeService: RecipeService){};
+  constructor(private recipeService: RecipeService, private router: Router){};
 
   @Input() title:string = '';
-
-
+  
   recipes: Recipe[] = [];
-  visibleRecipes: Recipe[] = [];
+
   recentRecipes: Recipe[] = [];
+
+  visibleRecipes: Recipe[] = [];
   visibleRecentRecipes: Recipe[] = [];
 
   recipesToShow = 3;
@@ -50,8 +51,13 @@ export class RecipeContainerComponent implements OnInit{
   }
 
   viewMoreRecipes(): void {
+    if(this.recipesToShow >=6){
+      this.router.navigate(['/view-recipes']);
+
+    }else{
     this.recipesToShow += this.increment;
     this.visibleRecipes = this.recipes.slice(0, this.recipesToShow);
+    }
   }
   viewMoreRecentRecipes(): void{
     this.recentRecipesToShow += this.increment;

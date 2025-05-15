@@ -1,1 +1,13 @@
-<p>view-recipes works!</p>
+<app-header></app-header>
+
+<div class="container">
+    <app-recipe-card 
+        *ngFor="let recipe of AppRecipes" 
+        [routerLink]="['/recipe', recipe.recipeId]"
+        [recipe]="recipe">
+    </app-recipe-card>
+
+</div>
+
+
+<app-footer></app-footer>
