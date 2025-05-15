@@ -11,8 +11,9 @@ import { Router } from '@angular/router';
 export class ButtonComponent {
 
   @Input() text:string = '';
-  @Input() route: string = '';
+  @Input() route?: string = '';
   @Input() fragment?: string = '';
+  @Input() action?: ()=>void;
 
   constructor(private router: Router){}
 
