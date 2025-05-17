@@ -8,16 +8,32 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RecipeService {
-  private recentRecipesUrl = `${privateUrl}/recipe/getRecentRecipes`;
-  private recipesUrl = `${privateUrl}/recipe/getAllRecipes`;
-  private recipeById = `${privateUrl}/recipe/getRecipeById`;
+  private recentRecipesUrl = `${privateUrl}/recipe/getRecentRecipes?page=0&size=6`;
+  private homeRecipesUrl = `${privateUrl}/recipe/getAllRecipes?page=0&size=3`;
+  private allRecipesUrl = `${privateUrl}/recipe/getAllRecipes`;
+  private recipeByIdUrl = `${privateUrl}/recipe/getRecipeById`;
+  private recipeByCategoryUrl = `${privateUrl}/recipe/getRecipesByCategoryName`;
 
-  private recipeSubject = new BehaviorSubject<Recipe[] | null>(null);
+  private allRecipeSubject = new BehaviorSubject<Recipe[] | null>(null);
+  allRecipes$ = this.allRecipeSubject.asObservable();
+
   private recentRecipesSubject = new BehaviorSubject<Recipe[] | null>(null);
-  recipes$ = this.recipeSubject.asObservable();
   recentRecipes$ = this.recentRecipesSubject.asObservable();
 
+  private homeRecipesSubject = new BehaviorSubject<Recipe[] | null>(null);
+  homeRecipes$ = this.homeRecipesSubject.asObservable();
+
+  private recipesByCategorySubject = new BehaviorSubject<Recipe[] | null>(null);
+  recipesByCategory$ = this.recipesByCategorySubject.asObservable();
+
   constructor(private http: HttpClient) { }
+
+  getRecipesByCategory(category: String) {
+    this.http.get<Recipe[]>(`${this.recipeByCategoryUrl}/${category}`).subscribe({
+      next: (data) => this.recipesByCategorySubject.next(data),
+      error: (error) => console.error('No recipes with this category found')
+    });
+  }
 
   getRecentRecipes() {
     if (!this.recentRecipesSubject.value) {
@@ -28,16 +44,21 @@ export class RecipeService {
     }
   }
 
-  getRecipes() {
-    if (!this.recipeSubject.value) {
-      this.http.get<Recipe[]>(this.recipesUrl).subscribe({
-        next: (recipes) => this.recipeSubject.next(recipes),
-        error: (error) => console.error('Error fetching recipes:', error)
-      });
-    }
+  getHomeRecipes(){
+    this.http.get<Recipe[]>(this.homeRecipesUrl).subscribe({
+      next: (recipes) => this.homeRecipesSubject.next(recipes),
+      error: (error) => console.error('Error fetching home recipes:', error)
+    });
+  }
+
+  getAllRecipes(){
+    this.http.get<Recipe[]>(this.allRecipesUrl).subscribe({
+      next: (recipes) => this.allRecipeSubject.next(recipes),
+      error: (error) => console.error('Error fetching all recipes:', error)      
+    });
   }
 
   getRecipeById(id: string): Observable<Recipe> {
-    return this.http.get<Recipe>(`${this.recipeById}/${id}`);
+    return this.http.get<Recipe>(`${this.recipeByIdUrl}/${id}`);
   }
 }

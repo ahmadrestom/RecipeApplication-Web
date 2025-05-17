@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CategoryService } from '../../Services/category.service';
 import { Category } from '../../Models/category';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-categories',
@@ -11,6 +11,14 @@ import { Category } from '../../Models/category';
 export class HomeCategoriesComponent{
 
   @Input() category: Category|null = null;
-  @Input() imageUrl: string = '';  
+  @Input() imageUrl: string = '';
+
+  constructor(private route: Router){}
+
+  onClick(){
+    this.route.navigate(['/view-recipes/',this.category?.categoryName])
+  }
+
+
 
 }

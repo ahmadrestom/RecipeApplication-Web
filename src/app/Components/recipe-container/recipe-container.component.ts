@@ -16,79 +16,40 @@ export class RecipeContainerComponent implements OnInit{
   constructor(private recipeService: RecipeService, private router: Router){};
 
   @Input() title:string = '';
-  
-  recipes: Recipe[] = [];
-
-  recentRecipes: Recipe[] = [];
-
-  visibleRecipes: Recipe[] = [];
-  visibleRecentRecipes: Recipe[] = [];
+  @Input() recipes?: Recipe[]| null = [];  
 
   recipesToShow = 3;
   increment = 3;
   recentRecipesToShow = 3;
-  loadingStates: { [recipeId: string]: boolean } = {};
+  
 
   ngOnInit(): void {
-    this.recipeService.getRecipes();
-    this.recipeService.getRecentRecipes();
-
-    this.recipeService.recipes$.subscribe(recipes => {
-      if (recipes) {
-        this.recipes = recipes;
-        this.visibleRecipes = this.recipes.slice(0, this.recipesToShow);
-        this.preloadImages(this.recipes);
-      }
-    });
-
-    this.recipeService.recentRecipes$.subscribe(recentRecipes => {
-      if (recentRecipes) {
-        this.recentRecipes = recentRecipes;
-        this.visibleRecentRecipes = this.recentRecipes.slice(0, this.recentRecipesToShow);
-        this.preloadImages(this.recentRecipes);
-      }
-    });
+    // this.visibleRecipes = this.recipes.slice(0, this.recipesToShow);
+    // this.visibleRecentRecipes = this.recentRecipes.slice(0, this.recentRecipesToShow);
   }
 
-  viewMoreRecipes(): void {
-    if(this.recipesToShow >=6){
-      this.router.navigate(['/view-recipes']);
-
-    }else{
-    this.recipesToShow += this.increment;
-    this.visibleRecipes = this.recipes.slice(0, this.recipesToShow);
-    }
-  }
-  viewMoreRecentRecipes(): void{
-    this.recentRecipesToShow += this.increment;
-    this.visibleRecentRecipes = this.recentRecipes.slice(0, this.recentRecipesToShow);
+  viewMoreRecipes():void{
+    this.router.navigate(['/view-recipes']);
   }
 
-  shouldShowViewMore() {
-    return (this.title === 'Explore Recipes' && this.recipesToShow < this.recipes.length) ||
-           (this.title === 'Trending Recipes' && this.recentRecipesToShow < this.recentRecipes.length);
-  }
+  // viewMoreRecipes(): void {
+  //   if(this.recipesToShow >=6){
+  //     this.router.navigate(['/view-recipes']);
 
-  preloadImages(recipes: Recipe[]): void {
-    recipes.forEach(recipe => {
-      this.loadingStates[recipe.recipeId] = true;
-      this.loadImage(recipe.imageUrl).then(() => {
-        this.loadingStates[recipe.recipeId] = false;
-      }).catch(() => {
-        this.loadingStates[recipe.recipeId] = false;
-      });
-      if (recipe.plateImageUrl) {
-        this.loadImage(recipe.plateImageUrl);
-      }
-    });
-  }
+  //   }else{
+  //   this.recipesToShow += this.increment;
+  //   this.visibleRecipes = this.recipes.slice(0, this.recipesToShow);
+  //   }
+  // }
+  // viewMoreRecentRecipes(): void{
+  //   this.recentRecipesToShow += this.increment;
+  //   this.visibleRecentRecipes = this.recipes.slice(0, this.recentRecipesToShow);
+  // }
 
-  private loadImage(url: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = url;
-      img.onload = () => resolve();
-      img.onerror = () => reject();
-    });
-  }
+  // shouldShowViewMore() {
+  //   return (this.title === 'Explore Recipes' && this.recipesToShow < this.recipes.length) ||
+  //          (this.title === 'Trending Recipes' && this.recentRecipesToShow < this.recipes.length);
+  // }
+
+  
 }

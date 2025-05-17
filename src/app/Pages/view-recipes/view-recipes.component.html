@@ -1,13 +1,14 @@
 <app-header></app-header>
 
-<div class="container">
+<!-- <div class="container">
     <app-recipe-card 
         *ngFor="let recipe of AppRecipes" 
         [routerLink]="['/recipe', recipe.recipeId]"
-        [recipe]="recipe">
+        [recipe]="recipe"
+        class="clickable-card">
     </app-recipe-card>
 
-</div>
-
+</div> -->
+<app-recipe-container [recipes]="AppRecipes"></app-recipe-container>
 
 <app-footer></app-footer>

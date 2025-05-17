@@ -17,6 +17,8 @@ import { BrandsComponent } from '../../Components/brands/brands.component';
 import { FooterComponent } from '../../Components/footer/footer.component';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../../Services/auth.service';
+import { Recipe } from '../../Models/recipe';
+import { RecipeService } from '../../Services/recipe.service';
 
 @Component({
   selector: 'app-home',
@@ -31,12 +33,15 @@ import { AuthServiceService } from '../../Services/auth.service';
     HomeCategoriesComponent,
     BrandsComponent,
     FooterComponent
-],
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
 
+  recipes: Recipe[] = [];
+
+  recentRecipes: Recipe[] = [];
   visibleBlogs: Blog[] = [];
   blogsToShow = 2;
   increment = 4;
@@ -44,8 +49,8 @@ export class HomeComponent implements OnInit {
   categories: Category[] = [];
   visibileCategories: Category[] = [];
   categoriesToShow = 4;
-
-  categoryImages: {[key:string]: string} = {};
+  loadingStates: { [recipeId: string]: boolean } = {};
+  categoryImages: { [key: string]: string } = {};
 
   brands: string[] = [
     'assets/Brands/amazon.svg',
@@ -55,28 +60,44 @@ export class HomeComponent implements OnInit {
     'assets/Brands/google.svg',
     'assets/Brands/walmart.svg'
   ];
-  
+
 
   constructor(
-    private blogService: BlogService, 
-    private categoryService:CategoryService,
+    private blogService: BlogService,
+    private categoryService: CategoryService,
     private pexelsService: PexelsService,
     private router: Router,
-    private authService: AuthServiceService
+    private authService: AuthServiceService,
+    private recipeService: RecipeService
 
-  ) {};
+  ) { };
+
 
   ngOnInit() {
+    console.log('Home ngOnInit')
     this.getBlogs();
     this.getCategories();
+    this.recipeService.getHomeRecipes();
+    this.recipeService.getRecentRecipes();
+
+    this.recipeService.homeRecipes$.subscribe(HomeRecipes => {
+      if (HomeRecipes) {
+        this.recipes = HomeRecipes;
+        
+        this.preloadImages(this.recipes);
+      }
+    });
+
+    this.recipeService.recentRecipes$.subscribe(recentRecipes => {
+      if (recentRecipes) {
+        this.recentRecipes = recentRecipes;
+        
+        this.preloadImages(this.recentRecipes);
+      }
+    });
   }
 
-  logout(): void{
-    this.authService.logout();
-  }
-
-
-  getCategories(): void{
+  getCategories(): void {
     this.categoryService.getAllCategories().subscribe({
       next: (data) => {
         this.categories = data;
@@ -86,25 +107,52 @@ export class HomeComponent implements OnInit {
       error: (error) => {
         console.error('Error fetching categories: ', error);
       }
-    });    
+    });
+  }
+  getImages(): void {
+    this.categories.forEach(category => {
+      this.pexelsService.searchImages(category.categoryName, 1).subscribe((data: PexelsResponse) => {
+        console.log(data);
+        this.categoryImages[category.categoryName] = data.photos[0]?.src.medium;
+      });
+    });
   }
 
-  viewMoreCategories():void{
-    this.categoriesToShow+=this.increment;
+  preloadImages(recipes: Recipe[]): void {
+    recipes.forEach(recipe => {
+      this.loadingStates[recipe.recipeId] = true;
+      this.loadImage(recipe.imageUrl).then(() => {
+        this.loadingStates[recipe.recipeId] = false;
+      }).catch(() => {
+        this.loadingStates[recipe.recipeId] = false;
+      });
+      if (recipe.plateImageUrl) {
+        this.loadImage(recipe.plateImageUrl);
+      }
+    });
+  }
+
+  private loadImage(url: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = url;
+      img.onload = () => resolve();
+      img.onerror = () => reject();
+    });
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
+
+
+  viewMoreCategories(): void {
+    this.categoriesToShow += this.increment;
     this.visibileCategories = this.categories.slice(0, this.categoriesToShow);
   }
 
-  getImages():void{
-    this.categories.forEach(category => {
-      this.pexelsService.searchImages(category.category_name,1).subscribe((data: PexelsResponse)=>{
-        console.log(`Image for ${category.category_name}: xx`);
-        this.categoryImages[category.category_name] = data.photos[0]?.src.medium;
-      });
-    }); 
-  }
-
   getBlogs(): void {
-    this.blogService.getLatestBlogs(2,1).subscribe(
+    this.blogService.getLatestBlogs(2, 1).subscribe(
       (blogs) => {
         this.visibleBlogs = blogs;
       },

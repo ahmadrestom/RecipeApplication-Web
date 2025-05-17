@@ -1,4 +1,4 @@
-<div class="container">
-    <img [src]="imageUrl" alt="{{category?.category_name}}">
-    <h3>{{category?.category_name}}</h3>
+<div class="container" (click)="onClick()">
+    <img [src]="imageUrl" alt="{{category?.categoryName}}">
+    <h3>{{category?.categoryName}}</h3>
 </div>

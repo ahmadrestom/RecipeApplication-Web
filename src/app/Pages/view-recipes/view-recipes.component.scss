@@ -7,5 +7,14 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 40px;
+        .clickable-card {
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+
+    &:hover {
+        box-shadow: 0 0 10px rgba(18, 149, 117, 0.6);
+    }
+}
     }
 }
