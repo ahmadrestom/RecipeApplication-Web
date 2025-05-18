@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, of, switchMap, tap } from 'rxjs';
 import { privateUrl, publicUrl } from '../../environments/environment';
-import { User } from '../Models/user';
+import { Role, User } from '../Models/user';
+import { Chef } from '../Models/chef';
 
 @Injectable({providedIn: 'root'})
 export class AuthServiceService{
@@ -11,10 +12,14 @@ export class AuthServiceService{
   private readonly authUrl = `${publicUrl}/auth/authenticate`;
   private readonly userUrl = `${privateUrl}/user/getUser`;
   private readonly registerUrl = `${publicUrl}/auth/register`;
+  private readonly chefUrl = `${privateUrl}/user/getChefData`;
 
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   private userSubject = new BehaviorSubject<User | null>(null);
   user$ = this.userSubject.asObservable();
+
+  private chefSubject = new BehaviorSubject<Chef | null>(null);
+  chef$ = this.chefSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {
     const token = localStorage.getItem('auth_token');
@@ -47,14 +52,52 @@ export class AuthServiceService{
   fetchUserData(){
     const token = localStorage.getItem('auth_token');
     if(!token) return;
-    this.http.get<User>(this.userUrl).subscribe({
-      next: user=>this.userSubject.next(user),
-      error: err=>{
-        console.log("Error fetching user data"),
+
+    this.http.get<User>(this.userUrl).pipe(
+      tap(user => {console.log('🚀 fetched user, role =', user.role);this.userSubject.next(user)}),
+      switchMap(user => 
+        user.role.toString() === "CHEF"
+          ? this.http.get<Chef>(`${this.chefUrl}/${user.id}`).pipe(
+            tap(chef => {console.log('👉 fetching chef data at',`${this.chefUrl}/${user.id}` );this.chefSubject.next(chef);console.log('💥 fetched CHEF payload:', chef);}),
+            catchError(err => {
+              console.error('Chef fetch failed', err);
+              this.chefSubject.next(null);
+              return of(undefined);
+            })
+          )
+          :of(undefined).pipe(
+              tap(() => this.chefSubject.next(null))
+            )
+      ),
+      catchError(err =>{
+        console.error('User fetch failed', err);
         this.logout();
-      }
-    });
+        return of(undefined);
+      })
+    ).subscribe();
   }
+
+
+    // this.http.get<User>(this.userUrl).subscribe({
+    //   next: (user)=>{
+    //     this.userSubject.next(user);
+    //     if(user.role == Role.CHEF){
+    //       this.http.get<Chef>(this.chefUrl).subscribe({
+    //         next: (chef) => {
+    //           this.chefSubject.next(chef);
+    //         },
+    //         error: (err) => {
+    //           console.error("Error fetching chef data: ",err);
+    //         }
+    //       })
+
+    //     }
+    //   },
+    //   error: err=>{
+    //     console.log("Error fetching user data"),
+    //     this.logout();
+    //   }
+    // });
 
   logout(){
     localStorage.removeItem('auth_token');

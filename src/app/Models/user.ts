@@ -1,5 +1,5 @@
-enum Role{
-    USER, ADMIN, CHEF
+export enum Role{
+    "USER", "ADMIN", "CHEF"
 }
 
 export interface User {

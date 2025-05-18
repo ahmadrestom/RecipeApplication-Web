@@ -1,10 +1,19 @@
-<div class="overlay" (click)="onClose()" *ngIf="user$ | async as user">
-  <div class="modal" (click)="$event.stopPropagation()">
-    <button class="close-btn" (click)="onClose()">×</button>
-    <h2>Your Profile</h2>
-    <!-- put your user info here -->
-    <p><strong>Name:</strong>{{user.firstName}} {{user.lastName}}</p>
-    <p><strong>Email:</strong>{{user.email}}</p>
-    <!-- etc. -->
-  </div>
+<div class="overlay" (click)="onClose()" *ngIf="profile$  | async as profile">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="onClose()">×</button>
+        <h2>Your Profile</h2>
+        <div class="img">
+            <img [src]="profile.user.imageUrl? profile.user.imageUrl: 'assets/icons/user.png'" alt="Profile image">
+        </div>
+        <!-- put your user info here -->
+        <p><strong>Name: </strong>{{profile.user.firstName}} {{profile.user.lastName}}</p>
+        <p><strong>Email: </strong>{{profile.user.email}}</p>
+        <!-- etc. -->
+        <ng-container *ngIf="profile.chefInfo && profile.user.role.toString() === 'CHEF'">
+            <p><strong>Bio: </strong>{{profile.chefInfo.bio}}</p>
+            <p><strong>Location: </strong>{{profile.chefInfo.location}}</p>
+            <p><strong>Phone Number: </strong>{{profile.chefInfo.phone_number}}</p>
+            <p><strong>Years Of Experience: </strong>{{profile.chefInfo.years_experience}}</p>
+        </ng-container>
+    </div>
 </div>

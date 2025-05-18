@@ -83,7 +83,6 @@ export class HomeComponent implements OnInit {
     this.recipeService.homeRecipes$.subscribe(HomeRecipes => {
       if (HomeRecipes) {
         this.recipes = HomeRecipes;
-        
         this.preloadImages(this.recipes);
       }
     });

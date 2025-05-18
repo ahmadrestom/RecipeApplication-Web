@@ -1,8 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthServiceService } from '../../Services/auth.service';
-import { Observable } from 'rxjs';
-import { User } from '../../Models/user';
-import { CommonModule, NgIf } from '@angular/common';
+import { combineLatest, filter, map, Observable, of, switchMap } from 'rxjs';
+import { Role, User } from '../../Models/user';
+import { CommonModule } from '@angular/common';
+import { Chef } from '../../Models/chef';
+
+interface FullProfile {
+  user: User;
+  chefInfo?: Chef;
+}
 
 @Component({
   selector: 'app-profile-modal',
@@ -10,25 +16,55 @@ import { CommonModule, NgIf } from '@angular/common';
   templateUrl: './profile-modal.component.html',
   styleUrl: './profile-modal.component.scss'
 })
-export class ProfileModalComponent implements OnInit{
+
+export class ProfileModalComponent implements OnInit {
 
   @Output() close = new EventEmitter<void>();
 
-  user$ :Observable<User|null>;
+  public Role = Role;
+  profile$!: Observable<FullProfile | null>;
 
-  onClose(){
-    this.close.emit();
-  }
-
-  constructor(private userService: AuthServiceService){
-    this.user$ = this.userService.user$;
-  }
+  constructor(private userService: AuthServiceService) { }
 
   ngOnInit(): void {
-    this.userService.fetchUserData();
-    this.userService.user$.subscribe({
+  this.userService.fetchUserData();
 
-    })      
+  this.profile$ = this.userService.user$.pipe(
+    switchMap(user => {
+      if (!user) {
+        return of<FullProfile | null>(null);
+      }
+
+      if (user.role.toString() === "CHEF") {
+        return this.userService.chef$.pipe(
+          filter((c): c is Chef => c != null),
+          map(chef => ({ user, chefInfo: chef } as FullProfile))
+        );
+      }
+
+      // normal user
+      return of({ user } as FullProfile);
+    })
+  );
+}
+
+  // ngOnInit(): void {
+  //   this.userService.fetchUserData();
+  //   this.profile$ = combineLatest({
+  //     user: this.userService.user$,
+  //     chef: this.userService.chef$
+  //   }).pipe(
+  //     map(({ user, chef }) => {
+  //       if (!user) {
+  //         return null;
+  //       }
+  //       const chefInfo = user.role === Role.CHEF ? chef : undefined;
+  //       return { user, chefInfo } as FullProfile;
+  //     })
+  //   );
+  // }
+
+  onClose() {
+    this.close.emit();
   }
-
 }
