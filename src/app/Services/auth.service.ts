@@ -77,28 +77,6 @@ export class AuthServiceService{
     ).subscribe();
   }
 
-
-    // this.http.get<User>(this.userUrl).subscribe({
-    //   next: (user)=>{
-    //     this.userSubject.next(user);
-    //     if(user.role == Role.CHEF){
-    //       this.http.get<Chef>(this.chefUrl).subscribe({
-    //         next: (chef) => {
-    //           this.chefSubject.next(chef);
-    //         },
-    //         error: (err) => {
-    //           console.error("Error fetching chef data: ",err);
-    //         }
-    //       })
-
-    //     }
-    //   },
-    //   error: err=>{
-    //     console.log("Error fetching user data"),
-    //     this.logout();
-    //   }
-    // });
-
   logout(){
     localStorage.removeItem('auth_token');
     this.isAuthenticated.next(false);

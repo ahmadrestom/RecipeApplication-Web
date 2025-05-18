@@ -11,9 +11,9 @@
         <!-- etc. -->
         <ng-container *ngIf="profile.chefInfo && profile.user.role.toString() === 'CHEF'">
             <p><strong>Bio: </strong>{{profile.chefInfo.bio}}</p>
-            <p><strong>Location: </strong>{{profile.chefInfo.location}}</p>
-            <p><strong>Phone Number: </strong>{{profile.chefInfo.phone_number}}</p>
-            <p><strong>Years Of Experience: </strong>{{profile.chefInfo.years_experience}}</p>
+            <p><strong>Experience: </strong>{{profile.chefInfo.years_experience}} Years</p>
+            <p><strong><i class="bi bi-geo-fill"></i>: </strong>{{profile.chefInfo.location}}</p>
+            <p><strong><i class="bi bi-phone"></i>: </strong>{{profile.chefInfo.phone_number}}</p>
         </ng-container>
     </div>
 </div>

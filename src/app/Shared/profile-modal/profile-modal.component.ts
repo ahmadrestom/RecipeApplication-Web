@@ -48,22 +48,6 @@ export class ProfileModalComponent implements OnInit {
   );
 }
 
-  // ngOnInit(): void {
-  //   this.userService.fetchUserData();
-  //   this.profile$ = combineLatest({
-  //     user: this.userService.user$,
-  //     chef: this.userService.chef$
-  //   }).pipe(
-  //     map(({ user, chef }) => {
-  //       if (!user) {
-  //         return null;
-  //       }
-  //       const chefInfo = user.role === Role.CHEF ? chef : undefined;
-  //       return { user, chefInfo } as FullProfile;
-  //     })
-  //   );
-  // }
-
   onClose() {
     this.close.emit();
   }
