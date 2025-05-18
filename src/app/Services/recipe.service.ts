@@ -29,9 +29,12 @@ export class RecipeService {
   constructor(private http: HttpClient) { }
 
   getRecipesByCategory(category: String) {
+    this.recipesByCategorySubject.next(null);
     this.http.get<Recipe[]>(`${this.recipeByCategoryUrl}/${category}`).subscribe({
       next: (data) => this.recipesByCategorySubject.next(data),
-      error: (error) => console.error('No recipes with this category found')
+      error: (error) => {console.error('No recipes with this category found');
+      this.recipesByCategorySubject.next([])
+      }
     });
   }
 

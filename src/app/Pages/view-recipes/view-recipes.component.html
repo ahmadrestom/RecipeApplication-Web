@@ -9,6 +9,11 @@
     </app-recipe-card>
 
 </div> -->
-<app-recipe-container [recipes]="AppRecipes"></app-recipe-container>
+<div *ngIf="AppRecipes?.length; else noRecipes">
+    <app-recipe-container [recipes]="AppRecipes"></app-recipe-container>
+</div>
+<ng-template #noRecipes>
+  <p>No recipes found in this category.</p>
+</ng-template>
 
 <app-footer></app-footer>

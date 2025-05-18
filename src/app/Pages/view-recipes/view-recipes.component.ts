@@ -5,10 +5,11 @@ import { RecipeService } from '../../Services/recipe.service';
 import { Recipe } from '../../Models/recipe';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeContainerComponent } from "../../Components/recipe-container/recipe-container.component";
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-view-recipes',
-  imports: [HeaderComponent, FooterComponent, RecipeContainerComponent],
+  imports: [HeaderComponent, FooterComponent, RecipeContainerComponent, NgIf],
   templateUrl: './view-recipes.component.html',
   styleUrl: './view-recipes.component.scss'
 })
@@ -22,11 +23,14 @@ export class ViewRecipesComponent implements OnInit {
 
   ngOnInit() {
     const category = this.route.snapshot.paramMap.get('category');
-    if (category) {
+    if (category){
       this.recipeService.getRecipesByCategory(category);
       this.recipeService.recipesByCategory$.subscribe(recipes => {
-        console.log(recipes)
-        this.AppRecipes = recipes;
+        if(recipes != null){
+          this.AppRecipes = recipes;
+        }else{
+          this.AppRecipes = null;
+        }
       })
     } else {
       this.recipeService.getAllRecipes();
