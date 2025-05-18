@@ -1,0 +1,10 @@
+<div class="overlay" (click)="onClose()" *ngIf="user$ | async as user">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="onClose()">×</button>
+    <h2>Your Profile</h2>
+    <!-- put your user info here -->
+    <p><strong>Name:</strong>{{user.firstName}} {{user.lastName}}</p>
+    <p><strong>Email:</strong>{{user.email}}</p>
+    <!-- etc. -->
+  </div>
+</div>

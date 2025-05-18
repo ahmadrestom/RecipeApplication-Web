@@ -10,7 +10,14 @@
             <a href="#">Saved Recipes</a>
         </li>
         <li>
-            <a href="#">Profile</a>
+            <a (click)="showProfile=true">Profile</a>
         </li>
     </ul>
 </nav>
+
+<app-profile-modal
+    *ngIf="showProfile"
+    (close)="showProfile = false"
+
+>
+</app-profile-modal>
