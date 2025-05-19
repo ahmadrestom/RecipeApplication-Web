@@ -106,6 +106,7 @@ export class AuthServiceService {
     this.isAuthenticated.next(false);
     this.userSubject.next(null);
     this.router.navigate(['']);
+    this.favoritesSubject.next(null);
   }
 
   get isLoggedIn() {

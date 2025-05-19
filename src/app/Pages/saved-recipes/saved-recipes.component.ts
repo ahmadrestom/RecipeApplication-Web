@@ -18,7 +18,9 @@ export class SavedRecipesComponent implements OnInit{
   ngOnInit(): void {
       this.authService.fetchUserFavorites();
       this.authService.favorites$.subscribe( recipes => {
-        this.recipes = recipes;
+        if(recipes != null){
+          this.recipes = recipes;
+        }
       })
   }
 }
