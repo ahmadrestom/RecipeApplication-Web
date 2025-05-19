@@ -5,7 +5,7 @@
     </div>
     <div class="post-review">
         <h3>Share your opinion</h3>
-        <textarea rows="5" cols="80" name="review" id="review" placeholder="Type here..."></textarea>
-        <app-button [text]="'Post Review'"></app-button>
+        <textarea [(ngModel)]="reviewText" rows="5" cols="80" name="review" id="review" placeholder="Type here..."></textarea>
+        <app-button [action]="onPostReview" [text]="'Post Review'"></app-button>
     </div>
 </div>

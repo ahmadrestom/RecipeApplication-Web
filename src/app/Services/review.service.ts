@@ -12,7 +12,9 @@ export class ReviewService {
   private reviewsSubject = new BehaviorSubject<Review[] | null>(null);
   reviews$ = this.reviewsSubject.asObservable();
 
-  private recipeReviewsUrl = `${privateUrl}/review/getRecipeReviews`;
+  private readonly recipeReviewsUrl = `${privateUrl}/review/getRecipeReviews`;
+  private readonly postRecipeUrl = `${privateUrl}/review/addReview`;
+
   constructor(private http: HttpClient) { }
 
 
@@ -23,7 +25,14 @@ export class ReviewService {
     })
   }
 
-  // getRecipeReviews(recipeId: string): Observable<Review[]>{
-  //   return this.http.get<Review[]>(`${this.recipeReviewsUrl}/${recipeId}`);
-  // }
+  postReview(recipeId: string, reviewText: string){
+    this.http.post(`${this.postRecipeUrl}/${recipeId}`, reviewText).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (err) => {
+        console.error("Error adding review",err);
+      }
+    })
+  }
 }

@@ -17,9 +17,11 @@ export class ButtonComponent {
 
   constructor(private router: Router){}
 
-  navigate(){
+  execute(){
     if(this.route){
       this.router.navigate([this.route], {fragment: this.fragment});
+    }else if(this.action){
+      this.action()
     }
   }
 
