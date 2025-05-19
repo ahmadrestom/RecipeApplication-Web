@@ -5,16 +5,22 @@ import { BehaviorSubject, catchError, of, switchMap, tap } from 'rxjs';
 import { privateUrl, publicUrl } from '../../environments/environment';
 import { Role, User } from '../Models/user';
 import { Chef } from '../Models/chef';
+import { Recipe } from '../Models/recipe';
 
-@Injectable({providedIn: 'root'})
-export class AuthServiceService{
+@Injectable({ providedIn: 'root' })
+export class AuthServiceService {
 
   private readonly authUrl = `${publicUrl}/auth/authenticate`;
   private readonly userUrl = `${privateUrl}/user/getUser`;
   private readonly registerUrl = `${publicUrl}/auth/register`;
   private readonly chefUrl = `${privateUrl}/user/getChefData`;
+  private readonly userFavoritesUrl = `${privateUrl}/user/getUserFavorites`;
 
   private isAuthenticated = new BehaviorSubject<boolean>(false);
+
+  private favoritesSubject = new BehaviorSubject<Recipe[] | null>(null);
+  favorites$ = this.favoritesSubject.asObservable();
+
   private userSubject = new BehaviorSubject<User | null>(null);
   user$ = this.userSubject.asObservable();
 
@@ -26,50 +32,68 @@ export class AuthServiceService{
     if (token) {
       this.fetchUserData();
     }
-   }
+  }
 
-  login(email:string, password:string){
-    return this.http.post<{token:string}>(this.authUrl, {email,password}).pipe(
-        tap(response =>{
-          localStorage.setItem('auth_token', response.token);
-          this.isAuthenticated.next(true);
-        }),
-        tap(()=>{
-          this.fetchUserData();
-          this.router.navigate(['/home']);
-        })
+  fetchUserFavorites() {
+    const token = localStorage.getItem('auth_token');
+    if (!token) return;
+
+    this.http.get<Recipe[]>(this.userFavoritesUrl).subscribe({
+      next: (data) => {
+        if (data == null) {
+          this.favoritesSubject.next(null);
+        } else {
+          this.favoritesSubject.next(data);
+        }
+      },
+
+      error: (error) => {
+        console.error("Error fetching user favorite recipes");
+      }
+    })
+  }
+
+  login(email: string, password: string) {
+    return this.http.post<{ token: string }>(this.authUrl, { email, password }).pipe(
+      tap(response => {
+        localStorage.setItem('auth_token', response.token);
+        this.isAuthenticated.next(true);
+      }),
+      tap(() => {
+        this.fetchUserData();
+        this.router.navigate(['/home']);
+      })
     );
   }
 
-  signup(firstName: string, lastName: string, email:string, password:string){
-    return this.http.post(this.registerUrl, {firstName, lastName, email, password}).pipe(
+  signup(firstName: string, lastName: string, email: string, password: string) {
+    return this.http.post(this.registerUrl, { firstName, lastName, email, password }).pipe(
       tap(() => {
         this.router.navigate(['/auth'], { queryParams: { mode: 'login' } });
-      })      
+      })
     );
   }
 
-  fetchUserData(){
+  fetchUserData() {
     const token = localStorage.getItem('auth_token');
-    if(!token) return;
+    if (!token) return;
 
     this.http.get<User>(this.userUrl).pipe(
-      tap(user => {console.log('🚀 fetched user, role =', user.role);this.userSubject.next(user)}),
-      switchMap(user => 
+      tap(user => { this.userSubject.next(user) }),
+      switchMap(user =>
         user.role.toString() === "CHEF"
           ? this.http.get<Chef>(`${this.chefUrl}/${user.id}`).pipe(
-            tap(chef => {console.log('👉 fetching chef data at',`${this.chefUrl}/${user.id}` );this.chefSubject.next(chef);console.log('💥 fetched CHEF payload:', chef);}),
+            tap(chef => { this.chefSubject.next(chef) }),
             catchError(err => {
-              console.error('Chef fetch failed', err);
               this.chefSubject.next(null);
               return of(undefined);
             })
           )
-          :of(undefined).pipe(
-              tap(() => this.chefSubject.next(null))
-            )
+          : of(undefined).pipe(
+            tap(() => this.chefSubject.next(null))
+          )
       ),
-      catchError(err =>{
+      catchError(err => {
         console.error('User fetch failed', err);
         this.logout();
         return of(undefined);
@@ -77,15 +101,14 @@ export class AuthServiceService{
     ).subscribe();
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('auth_token');
     this.isAuthenticated.next(false);
     this.userSubject.next(null);
     this.router.navigate(['']);
   }
 
-  get isLoggedIn(){
+  get isLoggedIn() {
     return this.isAuthenticated.asObservable;
   }
-
 }

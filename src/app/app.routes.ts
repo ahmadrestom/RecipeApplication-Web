@@ -7,6 +7,7 @@ import { RecipeComponent } from './Pages/recipe/recipe.component';
 import { BlogsComponent } from './Pages/blogs/blogs.component';
 import { CreateRecipeComponent } from './Pages/create-recipe/create-recipe.component';
 import { ViewRecipesComponent } from './Pages/view-recipes/view-recipes.component';
+import { SavedRecipesComponent } from './Pages/saved-recipes/saved-recipes.component';
 
 export const routes: Routes = [
     {path:'', component: LandingComponent},
@@ -20,6 +21,7 @@ export const routes: Routes = [
     {path: 'blogs', component: BlogsComponent},
     {path: 'create-recipe', component: CreateRecipeComponent},
     {path: 'view-recipes', component: ViewRecipesComponent},
-    {path: 'view-recipes/:category', component: ViewRecipesComponent}
+    {path: 'view-recipes/:category', component: ViewRecipesComponent},
+    {path: 'saved-recipes', component: SavedRecipesComponent}
 
 ];
