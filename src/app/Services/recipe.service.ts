@@ -49,7 +49,7 @@ export class RecipeService {
 
   getHomeRecipes(){
     this.http.get<Recipe[]>(this.homeRecipesUrl).subscribe({
-      next: (recipes) => this.homeRecipesSubject.next(recipes),
+      next: (recipes) => {this.homeRecipesSubject.next(recipes); console.log(recipes)},
       error: (error) => console.error('Error fetching home recipes:', error)
     });
   }

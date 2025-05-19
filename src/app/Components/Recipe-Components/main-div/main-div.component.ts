@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Recipe } from '../../../Models/recipe';
 import { IngredientsComponent } from '../ingredients/ingredients.component';
 import { InstructionsComponent } from '../instructions/instructions.component';
@@ -26,6 +26,7 @@ export class MainDivComponent implements OnInit{
       this.fetchReviews();
     }
   }
+
 
   ngOnInit(): void {
       this.reviewsService.getRecipeReviews(this.recipe.recipeId);this.fetchReviews();

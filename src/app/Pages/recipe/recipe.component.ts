@@ -21,6 +21,7 @@ import { FooterComponent } from '../../Components/footer/footer.component';
   templateUrl: './recipe.component.html',
   styleUrl: './recipe.component.scss'
 })
+
 export class RecipeComponent implements OnInit{
 
   recipeId!: string;
