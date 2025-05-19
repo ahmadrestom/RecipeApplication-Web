@@ -1,1 +1,29 @@
-<app-recipe-container [recipes]="recipes"></app-recipe-container>
+<div class="container">
+    <app-header></app-header>
+    <main class="main-content">
+        <ng-container *ngIf="recipes && recipes.length>0; else noFavorites">
+            <app-recipe-container [recipes]="recipes"></app-recipe-container>
+        </ng-container>
+        <ng-template #noFavorites >
+            <div class="noFavorites">
+                <section class="empty-wrapper text-center m-auto">
+                <i class="bi bi-heartbreak display-3 text-danger mb-3"></i>
+                <h3 class="fw-semibold">No saved recipes yet</h3>
+                <p class="text-muted mb-4">
+                    Browse our delicious dishes and tap
+                    <i class="bi bi-heart-fill text-danger"></i>
+                    to add them to your favourites.
+                </p>
+                <a routerLink="/home" class="btn btn-primary d-inline-flex align-items-center gap-2">
+                    Explore Recipes
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </section>
+            <dotlottie-player src="https://lottie.host/41f5637c-6aad-466e-b1b1-8b0971c7acb5/ZFDSYGJUmk.lottie"
+                background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay>
+            </dotlottie-player>
+            </div>
+        </ng-template>
+    </main>
+    <app-footer></app-footer>
+</div>
