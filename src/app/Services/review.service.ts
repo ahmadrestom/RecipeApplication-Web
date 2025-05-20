@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ReviewService {
 
-  private reviewsSubject = new BehaviorSubject<Review[] | null>(null);
+  private reviewsSubject = new BehaviorSubject<Review[]>([]);
   reviews$ = this.reviewsSubject.asObservable();
 
   private readonly recipeReviewsUrl = `${privateUrl}/review/getRecipeReviews`;
@@ -17,8 +17,7 @@ export class ReviewService {
 
   constructor(private http: HttpClient) { }
 
-
-  getRecipeReviews(recipeId: string)  {
+  getRecipeReviews(recipeId: string) {
     this.http.get<Review[]>(`${this.recipeReviewsUrl}/${recipeId}`).subscribe({
       next: (reviews) => this.reviewsSubject.next(reviews),
       error: (error) => console.error('Error fetching reviews')
@@ -26,9 +25,11 @@ export class ReviewService {
   }
 
   postReview(recipeId: string, reviewText: string){
-    this.http.post(`${this.postRecipeUrl}/${recipeId}`, reviewText).subscribe({
-      next: (response) => {
+    this.http.post<Review>(`${this.postRecipeUrl}/${recipeId}`, reviewText).subscribe({
+      next: (response: Review) => {
         console.log(response);
+        const prev = this.reviewsSubject.value || [];
+        this.reviewsSubject.next([...prev, response]);
       },
       error: (err) => {
         console.error("Error adding review",err);

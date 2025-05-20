@@ -27,6 +27,7 @@ export class ReviewsComponent {
 
   onPostReview = () => {
     this.postReview(this.reviewText, this.recipeId);
+    this.reviewText = '';
   }
 
 }

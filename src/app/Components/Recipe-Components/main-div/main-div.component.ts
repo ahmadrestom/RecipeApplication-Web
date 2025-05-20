@@ -5,7 +5,6 @@ import { InstructionsComponent } from '../instructions/instructions.component';
 import { PrintRecipeComponent } from '../print-recipe/print-recipe.component';
 import { Review } from '../../../Models/review';
 import { ReviewService } from '../../../Services/review.service';
-import { NgFor } from '@angular/common';
 import { ReviewsComponent } from '../reviews/reviews.component';
 
 @Component({
@@ -20,17 +19,16 @@ export class MainDivComponent implements OnInit{
   private _recipe!: Recipe;
 
   @Input()
-  set recipe(value: Recipe) {
+  set recipe(value: Recipe){
     this._recipe = value;
     if (this._recipe?.recipeId) {
       this.fetchReviews();
     }
   }
 
-
   ngOnInit(): void {
-      this.reviewsService.getRecipeReviews(this.recipe.recipeId);this.fetchReviews();
-      
+      //this.reviewsService.getRecipeReviews(this.recipe.recipeId);
+      this.fetchReviews();
   }
 
   get recipe(): Recipe {
@@ -38,13 +36,13 @@ export class MainDivComponent implements OnInit{
   }
 
   fetchReviews(): void {
+    this.reviewsService.getRecipeReviews(this.recipe.recipeId);
     this.reviewsService.reviews$.subscribe(reviews=>{
       if(reviews){
         this.reviews = reviews;
       }
     })
   }
-
 
   printRecipe() {
     window.print();

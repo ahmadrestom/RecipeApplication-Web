@@ -27,4 +27,4 @@
 <app-print-recipe class="printArea" [recipe]="recipe"></app-print-recipe>
 <hr class="reviews-hr">
 
-<app-reviews [recipeId]="recipe.recipeId" [reviews]="recipe.reviews"></app-reviews>
+<app-reviews (reviewPosted)="fetchReviews()" [recipeId]="recipe.recipeId" [reviews]="reviews"></app-reviews>
