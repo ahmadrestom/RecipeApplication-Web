@@ -6,6 +6,7 @@ import { AuthServiceService } from '../../../Services/auth.service';
 import { UpgradeToChef } from '../../../Models/chef';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from "../../button/button.component";
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-upgrade-to-chef',
@@ -29,10 +30,12 @@ export class UpgradeToChefComponent implements OnInit{
 
   phoneCode = '';
   phoneNumber = '';
+  city = '';
+  country = '';
 
   
 
-  constructor(private countriesService: CountryService, private authService:AuthServiceService){}
+  constructor(private router: Router,private countriesService: CountryService, private authService:AuthServiceService){}
 
   ngOnInit(): void {
     this.countriesService.fetchCountries().subscribe(data => {
@@ -54,7 +57,11 @@ export class UpgradeToChefComponent implements OnInit{
   }
 
   onSubmit(){
-
+    this.chefUpgradeModel.phone_number = `+${this.phoneCode} ${this.phoneNumber}`;
+    this.chefUpgradeModel.location = `${this.city}, ${this.country}`;
+    this.authService.upgradeToChef(this.chefUpgradeModel);
+    this.router.navigate(['/home']);
+    
   }
 
   submitForm = () => {

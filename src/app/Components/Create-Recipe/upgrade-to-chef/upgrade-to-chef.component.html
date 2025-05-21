@@ -28,10 +28,15 @@
     </div>
     <div class="form-elemnt">
         <label for="country">Where are you from?</label>
-        <select [(ngModel)]="chefUpgradeModel.location" id="country" name="country">
+        <select [(ngModel)]="country" id="country" name="country">
             <option value="" disabled selected hidden>-- Select a country --</option>
-            <option *ngFor="let c of countries" value="c.name.common">{{c.name.common}}</option>
+            <option *ngFor="let c of countries" [value]="c.name.common">{{c.name.common}}</option>
         </select>
+    </div>
+    <div class="form-elemnt">
+        <label for="">City:</label>
+        <input [(ngModel)]="city" name="city" type="text" autocomplete="false"
+            placeholder="What city are you from?">
     </div>
     <app-button [action]="submitForm" [text]="'Submit'"></app-button>
 </form>

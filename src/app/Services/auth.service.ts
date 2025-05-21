@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, of, switchMap, tap } from 'rxjs';
 import { privateUrl, publicUrl } from '../../environments/environment';
 import { Role, User } from '../Models/user';
-import { Chef } from '../Models/chef';
+import { Chef, UpgradeToChef } from '../Models/chef';
 import { Recipe } from '../Models/recipe';
 
 @Injectable({ providedIn: 'root' })
@@ -15,6 +15,7 @@ export class AuthServiceService {
   private readonly registerUrl = `${publicUrl}/auth/register`;
   private readonly chefUrl = `${privateUrl}/user/getChefData`;
   private readonly userFavoritesUrl = `${privateUrl}/user/getUserFavorites`;
+  private readonly upgradeToChefUrl = `${privateUrl}/user/upgradeToChef`;
 
   private isAuthenticated = new BehaviorSubject<boolean>(false);
 
@@ -32,6 +33,12 @@ export class AuthServiceService {
     if (token) {
       this.fetchUserData();
     }
+  }
+
+  upgradeToChef(chef:UpgradeToChef){
+    this.http.put(this.upgradeToChefUrl, chef).subscribe( response => {
+      console.log(response);
+    })
   }
 
   fetchUserFavorites() {
