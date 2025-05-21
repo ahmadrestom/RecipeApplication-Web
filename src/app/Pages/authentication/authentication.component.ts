@@ -14,12 +14,8 @@ import { FoodBackgroundComponent } from '../../Components/food-background/food-b
 })
 export class AuthenticationComponent implements OnInit {
   mode: 'login' | 'signup' = 'login';
-  constructor(
-    private route: ActivatedRoute,
-    /*private cdRef: ChangeDetectorRef*/) 
-    {
-      
-    };
+
+  constructor(private route: ActivatedRoute){};
 
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {

@@ -19,9 +19,8 @@ export const routes: Routes = [
     },
     {path: 'recipe/:id', component: RecipeComponent},
     {path: 'blogs', component: BlogsComponent},
-    {path: 'create-recipe', component: CreateRecipeComponent},
     {path: 'view-recipes', component: ViewRecipesComponent},
     {path: 'view-recipes/:category', component: ViewRecipesComponent},
-    {path: 'saved-recipes', component: SavedRecipesComponent}
-
+    {path: 'saved-recipes', component: SavedRecipesComponent},
+    {path: 'create-recipe', component: CreateRecipeComponent},
 ];

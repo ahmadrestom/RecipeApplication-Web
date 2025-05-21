@@ -8,3 +8,11 @@ export interface Chef{
     bio: string;
     years_experience: number;
 }
+
+export interface UpgradeToChef{
+    userId: string;
+    location: string;
+    bio: string;
+    years_experience: number;
+    phone_number: string;
+}
