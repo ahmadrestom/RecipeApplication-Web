@@ -13,6 +13,6 @@ export interface UpgradeToChef{
     userId: string;
     location: string;
     bio: string;
-    years_experience: number;
+    years_experience: number | null;
     phone_number: string;
 }

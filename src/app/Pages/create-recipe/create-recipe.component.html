@@ -4,7 +4,6 @@
     <div class="submit-button">
         <h1 *ngIf="user.role.toString() === 'CHEF'">Create Recipe</h1>
         <h1 *ngIf="user.role.toString() === 'USER'">Upgrade to Chef</h1>
-        <app-button [text]="'Save'"></app-button>
     </div>
     <hr>
     <app-create-recipe-form *ngIf="user.role.toString() === 'CHEF'"></app-create-recipe-form>

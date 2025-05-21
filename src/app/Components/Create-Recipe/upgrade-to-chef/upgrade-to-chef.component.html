@@ -1,6 +1,37 @@
-<form id="form">
+<form (ngSubmit)="onSubmit()" id="form">
+    <div class="form-elemnt static">
+        <label for="">Name: </label>
+        <input [value]=name name="name" type="text" disabled>
+    </div>
+    <div class="form-elemnt static">
+        <label for="">Email: </label>
+        <input [value]=email name="name" type="text" disabled>
+    </div>
     <div class="form-elemnt">
-        <label for="">Write a short biography:</label>
-        <textarea name="recipeName" type="text" autocomplete="false" placeholder="Enter title"></textarea>
-    </div>    
+        <label for="">Bio:</label>
+        <textarea [(ngModel)]="chefUpgradeModel.bio" name="recipeName" rows="4" type="text" autocomplete="false"
+            placeholder="Write a short biography"></textarea>
+    </div>
+    <div class="form-elemnt">
+        <label for="">Years of experience:</label>
+        <input [(ngModel)]="chefUpgradeModel.years_experience" name="years_of_exp" min="0" max="100" type="number" autocomplete="false"
+            placeholder="How many years of experience do you have">
+    </div>
+    <div class="form-elemnt">
+        <label for="">Mobile Number</label>
+        <div class="phone-number">
+            <input [(ngModel)]="phoneCode" name="code" min="1" max="1000" type="number" autocomplete="false"
+                placeholder="Code">
+            <input [(ngModel)]="phoneNumber" name="number" min="1" max="1000" type="number" autocomplete="false"
+                placeholder="Phone Number">
+        </div>
+    </div>
+    <div class="form-elemnt">
+        <label for="country">Where are you from?</label>
+        <select [(ngModel)]="chefUpgradeModel.location" id="country" name="country">
+            <option value="" disabled selected hidden>-- Select a country --</option>
+            <option *ngFor="let c of countries" value="c.name.common">{{c.name.common}}</option>
+        </select>
+    </div>
+    <app-button [action]="submitForm" [text]="'Submit'"></app-button>
 </form>

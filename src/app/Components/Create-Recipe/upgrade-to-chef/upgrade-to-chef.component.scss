@@ -23,11 +23,50 @@
                 font-size: 20px;
             }
 
-            textarea{
+            textarea,
+            input {
                 padding: 13px 10px;
                 border: 1px solid rgba(18, 149, 117, 1);
                 border-radius: 5px;
                 resize: none;
+            }
+
+            .phone-number {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+
+                input {
+                    &:first-child {
+                        flex: 1;
+                    }
+
+                    &:last-child {
+
+                        flex: 3;
+
+                    }
+                }
+            }
+             select {
+                    padding: 7px 12px;
+                    border: 1px solid rgba(18, 149, 117, 1);
+                    border-radius: 5px;
+                }
+        }
+        .static{
+            display: flex;
+            flex-direction: row;
+            label{
+                flex: 1;
+            }
+            input{
+                flex: 7;
+                transition: background-color 0.5s ease;
+                &:hover{
+                    background-color:rgba(18, 149, 117, 0.2);
+                }
             }
         }
     }
