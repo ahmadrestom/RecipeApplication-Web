@@ -8,6 +8,7 @@ import { BlogsComponent } from './Pages/blogs/blogs.component';
 import { CreateRecipeComponent } from './Pages/create-recipe/create-recipe.component';
 import { ViewRecipesComponent } from './Pages/view-recipes/view-recipes.component';
 import { SavedRecipesComponent } from './Pages/saved-recipes/saved-recipes.component';
+import { NotificationsComponent } from './Pages/notifications/notifications.component';
 
 export const routes: Routes = [
     {path:'', component: LandingComponent},
@@ -23,4 +24,5 @@ export const routes: Routes = [
     {path: 'view-recipes/:category', component: ViewRecipesComponent},
     {path: 'saved-recipes', component: SavedRecipesComponent},
     {path: 'create-recipe', component: CreateRecipeComponent},
+    {path: 'notification', component: NotificationsComponent}
 ];
