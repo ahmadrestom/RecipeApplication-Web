@@ -1,0 +1,8 @@
+<div class="container">
+    <button (click)="onDelete()" class="manipulate">×</button>
+    <button *ngIf="notification.isRead" class="manipulate bell"><i class="bi bi-bell-fill"></i></button>
+    <button *ngIf="!notification.isRead" class="manipulate bell"><i class="bi bi-bell"></i></button>
+    <h3>Notification</h3>
+    <p>{{notification.title}}</p>
+    <p>{{notification.message}}</p>
+</div>

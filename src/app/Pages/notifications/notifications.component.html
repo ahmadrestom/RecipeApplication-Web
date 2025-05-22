@@ -1,1 +1,17 @@
-<p>notifications works!</p>
+<app-header></app-header>
+<div class="read">
+    <span>
+        Read
+    </span>
+    <span>
+        Unread
+    </span>
+    <span>
+        All
+    </span>
+</div>
+<div class="notification-cards">
+    <app-notification-card (delete)="deleteNotification($event)" *ngFor="let notification of notificiations" [notification]="notification">
+    </app-notification-card>
+</div>
+<app-footer></app-footer>
