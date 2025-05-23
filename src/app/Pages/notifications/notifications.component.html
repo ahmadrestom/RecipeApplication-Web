@@ -15,6 +15,7 @@
         *ngFor="let notification of notifications$ | async; trackBy: trackById" 
         [notification]="notification"  
         (delete)="deleteNotification($event)"
+        (markAsRead)="markAsRead($event)"
         >
     </app-notification-card>
 </div>

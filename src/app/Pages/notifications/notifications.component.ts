@@ -9,13 +9,13 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-notifications',
-  imports: [NotificationCardComponent, HeaderComponent, FooterComponent,CommonModule],
+  imports: [NotificationCardComponent, HeaderComponent, FooterComponent, CommonModule],
   templateUrl: './notifications.component.html',
   styleUrl: './notifications.component.scss'
 })
 export class NotificationsComponent implements OnInit {
 
-   notifications$!: Observable<getNotification[]>;   
+  notifications$!: Observable<getNotification[]>;
 
   constructor(private notificationService: NotificationService) { }
 
@@ -25,9 +25,14 @@ export class NotificationsComponent implements OnInit {
   }
 
   deleteNotification(id: string) {
-  this.notificationService.deleteNotification(id);
-}
-trackById(_: number, notif: getNotification) {
-  return notif.notificationId;
-}
+    this.notificationService.deleteNotification(id);
+  }
+  trackById(_: number, notif: getNotification) {
+    return notif.notificationId;
+  }
+
+  markAsRead(id: string){
+    console.log("SUP BITCH")
+    this.notificationService.markAsRead(id);
+  }
 }

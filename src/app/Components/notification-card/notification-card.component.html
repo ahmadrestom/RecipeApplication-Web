@@ -1,7 +1,8 @@
 <div class="container" *ngIf="!isRemoving" @fadeOut>
     <button (click)="onDelete()" class="manipulate">×</button>
-    <button *ngIf="notification.read === true" class="manipulate bell"><i class="bi bi-bell-fill"></i></button>
-    <button *ngIf="notification.read === false" class="manipulate bell"><i class="bi bi-bell"></i></button>
+    <button (click)="onMarkAsReadClick()" *ngIf="notification.read === false" class="manipulate bell"><i
+            class="bi bi-bell-fill"></i></button>
+    <button *ngIf="notification.read === true" class="manipulate bell"><i class="bi bi-bell"></i></button>
     <h3>Notification</h3>
     <p>{{notification.title}}</p>
     <p>{{notification.message}}</p>

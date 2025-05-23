@@ -26,6 +26,7 @@ export class NotificationCardComponent {
 
   @Input() notification!: getNotification;
   @Output() delete = new EventEmitter<string>();
+  @Output() markAsRead = new EventEmitter<string>();
 
   constructor(){}
 
@@ -34,6 +35,12 @@ export class NotificationCardComponent {
     setTimeout(() => {
       this.delete.emit(this.notification.notificationId);      
     }, 600);
+  }
+
+  onMarkAsReadClick(){
+    this.notification.read = true;
+    console.log("SUP SEXY")
+    this.markAsRead.emit(this.notification.notificationId);
   }
 
 }
