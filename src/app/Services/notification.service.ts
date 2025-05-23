@@ -21,6 +21,7 @@ export class NotificationService {
   fetchNotification() {
     this.http.get<getNotification[]>(this.getNotificationUrl).subscribe({
       next: (data) => {
+        console.log(data)
         this.notificationsSubject.next(data);
       },
       error: (error) => {

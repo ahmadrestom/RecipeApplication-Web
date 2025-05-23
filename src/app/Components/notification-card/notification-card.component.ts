@@ -1,14 +1,28 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { getNotification } from '../../Models/notification';
 import { NgIf } from '@angular/common';
-
+import {
+  trigger,
+  transition,
+  style,
+  animate
+} from '@angular/animations';
 @Component({
   selector: 'app-notification-card',
   imports: [NgIf],
   templateUrl: './notification-card.component.html',
-  styleUrl: './notification-card.component.scss'
+  styleUrl: './notification-card.component.scss',
+  animations: [
+    trigger('fadeOut', [
+      transition(':leave', [
+        animate('600ms ease', style({ opacity: 0, transform: 'translateY(300px)' }))
+      ])
+    ])
+  ]
 })
 export class NotificationCardComponent {
+
+  isRemoving = false;
 
   @Input() notification!: getNotification;
   @Output() delete = new EventEmitter<string>();
@@ -16,7 +30,10 @@ export class NotificationCardComponent {
   constructor(){}
 
   onDelete(){
-    this.delete.emit(this.notification.notificationId);
+    this.isRemoving = true;
+    setTimeout(() => {
+      this.delete.emit(this.notification.notificationId);      
+    }, 600);
   }
 
 }
