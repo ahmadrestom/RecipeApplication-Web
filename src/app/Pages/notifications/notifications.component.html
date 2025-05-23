@@ -1,18 +1,18 @@
 <app-header></app-header>
 <div class="read">
-    <span>
-        Read
+    <span (click)="setFilter('all')" [class.active]="(selectedFilter$ | async) === 'all'">
+        All
     </span>
-    <span>
+    <span (click)="setFilter('unread')" [class.active]="(selectedFilter$ | async) === 'unread'">
         Unread
     </span>
-    <span>
-        All
+    <span (click)="setFilter('read')" [class.active]="(selectedFilter$|async) === 'read'">
+        Read
     </span>
 </div>
 <div class="notification-cards">
     <app-notification-card 
-        *ngFor="let notification of notifications$ | async; trackBy: trackById" 
+        *ngFor="let notification of filteredNotifications$ | async; trackBy: trackById" 
         [notification]="notification"  
         (delete)="deleteNotification($event)"
         (markAsRead)="markAsRead($event)"

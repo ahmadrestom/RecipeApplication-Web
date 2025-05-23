@@ -1,16 +1,33 @@
-:host{
-    .read{
+:host {
+    .read {
+        margin-top: 50px;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        gap: 30px;
-        span{
-            background-color: rgba(100,100,100,0.5);
+        gap: 120px;
+
+        span {
+            position: relative;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(100, 100, 100, 0.2);
             padding: 5px 7px;
             border-radius: 7px;
+            min-width: 80px;
+            transition: color 0.6s ease;
+            transition: background-color 0.4 ease;
+        }
+
+        .active {
+            background-color: rgba(18, 149, 117, 1);
+            color: white;
         }
     }
-    .notification-cards{
+
+    .notification-cards {
         display: flex;
         flex-direction: column;
         gap: 20px;

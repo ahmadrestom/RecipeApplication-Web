@@ -1,15 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { getNotification } from '../../Models/notification';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import {
   trigger,
   transition,
   style,
   animate
 } from '@angular/animations';
+import { TimeAgoPipe } from '../../Pipes/time-ago.pipe';
 @Component({
   selector: 'app-notification-card',
-  imports: [NgIf],
+  imports: [CommonModule, TimeAgoPipe],
   templateUrl: './notification-card.component.html',
   styleUrl: './notification-card.component.scss',
   animations: [

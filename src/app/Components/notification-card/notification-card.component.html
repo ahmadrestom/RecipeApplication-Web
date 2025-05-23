@@ -3,7 +3,9 @@
     <button (click)="onMarkAsRead()" *ngIf="notification.read === false" class="manipulate bell"><i
             class="bi bi-bell-fill"></i></button>
     <button *ngIf="notification.read === true" class="manipulate bell"><i class="bi bi-bell"></i></button>
-    <h3>Notification</h3>
+    <h3 *ngIf="notification.read === false">New Notification</h3>
+    <h3 *ngIf="notification.read === true">Notification</h3>
     <p>{{notification.title}}</p>
     <p>{{notification.message}}</p>
+    <small>{{notification.createdAt | timeAgo}}</small>
 </div>
