@@ -11,7 +11,11 @@
     </span>
 </div>
 <div class="notification-cards">
-    <app-notification-card (delete)="deleteNotification($event)" *ngFor="let notification of notificiations" [notification]="notification">
+    <app-notification-card 
+        *ngFor="let notification of notifications$ | async; trackBy: trackById" 
+        [notification]="notification"  
+        (delete)="deleteNotification($event)"
+        >
     </app-notification-card>
 </div>
 <app-footer></app-footer>

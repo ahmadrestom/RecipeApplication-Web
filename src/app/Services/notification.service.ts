@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { privateUrl } from '../../environments/environment';
 import { getNotification } from '../Models/notification';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,23 +13,33 @@ export class NotificationService {
   private readonly deleteNotificationUrl = `${privateUrl}/notification/deleteNotification`;
 
 
-  private notificationsSubject = new BehaviorSubject<getNotification[] | undefined>(undefined);
+  private notificationsSubject = new BehaviorSubject<getNotification[]>([]);
   notification$ = this.notificationsSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
-  fetchNotification(){
+  fetchNotification() {
     this.http.get<getNotification[]>(this.getNotificationUrl).subscribe({
-      next: (data)=>{
+      next: (data) => {
         this.notificationsSubject.next(data);
       },
       error: (error) => {
-        console.error('Error fetching notifications ',error);
+        console.error('Error fetching notifications ', error);
       }
     })
   }
 
-  deleteNotification(notificationId: string): Observable<any>{
-    return this.http.delete(`${this.deleteNotificationUrl}/${notificationId}`);
+  deleteNotification(notificationId: string): void {
+    this.http
+      .delete(`${this.deleteNotificationUrl}/${notificationId}`, { responseType: 'text' })
+      .subscribe({
+        next: () => {
+          const updated = this.notificationsSubject.value?.filter(
+            n => n.notificationId !== notificationId
+          );
+          this.notificationsSubject.next(updated);
+        },
+        error: err => console.error('Delete failed', err)
+      });
   }
 }
