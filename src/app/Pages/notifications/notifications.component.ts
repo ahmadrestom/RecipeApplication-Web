@@ -32,7 +32,6 @@ export class NotificationsComponent implements OnInit {
   }
 
   markAsRead(id: string){
-    console.log("SUP BITCH")
     this.notificationService.markAsRead(id);
   }
 }

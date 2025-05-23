@@ -37,9 +37,9 @@ export class NotificationCardComponent {
     }, 600);
   }
 
-  onMarkAsReadClick(){
-    this.notification.read = true;
-    console.log("SUP SEXY")
+  onMarkAsRead(){
+    //this.notification.read = true;
+    
     this.markAsRead.emit(this.notification.notificationId);
   }
 

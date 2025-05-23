@@ -19,15 +19,21 @@ export class NotificationService {
 
   constructor(private http: HttpClient) { }
 
-  markAsRead(notificationId: string): Observable<any>{
-    console.log("SUP NIGGA");
-    return this.http.put(`${this.markAsReadUrl}/${notificationId}`,null)
+  markAsRead(notificationId: string){
+    this.http.put(`${this.markAsReadUrl}/${notificationId}`, null, { responseType: 'text' }).subscribe({
+      next: ()=>{
+        const updated = this.notificationsSubject.value.map(n =>
+        n.notificationId === notificationId ? { ...n, read: true } : n
+      );
+      this.notificationsSubject.next(updated);
+      },
+      error: (err)=> console.error("Error marking as read",err)
+    })
   }
 
   fetchNotification() {
     this.http.get<getNotification[]>(this.getNotificationUrl).subscribe({
       next: (data) => {
-        console.log(data)
         this.notificationsSubject.next(data);
       },
       error: (error) => {
