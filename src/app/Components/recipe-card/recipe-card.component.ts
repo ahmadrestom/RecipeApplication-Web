@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '../../Models/recipe';
+import { ChefRecipe, Recipe } from '../../Models/recipe';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,7 +10,8 @@ import { CommonModule } from '@angular/common';
 })
 export class RecipeCardComponent {
 
-  @Input() recipe: Recipe|null = null; 
+  @Input() recipe: Recipe|null = null;
+  @Input() ChefRecipe: ChefRecipe | null = null;
 
   stars: number[] = [1, 2, 3, 4, 5];
 

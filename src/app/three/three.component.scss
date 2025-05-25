@@ -3,7 +3,7 @@
   
   width: 100vw;
   height: 100vh;
-  z-index: -90; /* Ensure it's behind all other content */
+  z-index: -1000; /* Ensure it's behind all other content */
   pointer-events: none; /* Prevent it from blocking clicks */
   overflow: hidden;
 }

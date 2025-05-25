@@ -9,6 +9,7 @@ import { CreateRecipeComponent } from './Pages/create-recipe/create-recipe.compo
 import { ViewRecipesComponent } from './Pages/view-recipes/view-recipes.component';
 import { SavedRecipesComponent } from './Pages/saved-recipes/saved-recipes.component';
 import { NotificationsComponent } from './Pages/notifications/notifications.component';
+import { ChefInfoComponent } from './Pages/chef-info/chef-info.component';
 
 export const routes: Routes = [
     {path:'', component: LandingComponent},
@@ -51,6 +52,11 @@ export const routes: Routes = [
     {
         path: 'notification',
         component: NotificationsComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'chef-info',
+        component: ChefInfoComponent,
         canActivate: [authGuard]
     }
 ];

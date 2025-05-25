@@ -1,0 +1,12 @@
+<app-header></app-header>
+<div class="container">
+    <div class="chef-info">
+        <div class="img">
+            <img [src]="chefData.image_url" alt="">
+        </div>
+    </div>
+    <div class="chef-recipes">
+        <app-recipe-card *ngFor="let r of chefRecipes" [ChefRecipe]="r"></app-recipe-card>        
+    </div>
+</div>
+<app-footer></app-footer>

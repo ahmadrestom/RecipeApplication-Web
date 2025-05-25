@@ -8,16 +8,6 @@ export enum DifficultyLevel{
     Easy, Medium, Hard
 }
 
-interface ChefForRecipe{
-    chefId: string;
-    firstName:string;
-    lastName:string;
-    image_url:string;
-    location:string;
-    phone_number:string;
-    bio:string;
-    years_experience:number;
-}
 export interface Recipe {
     recipeId: string;
     recipeName: string;
@@ -50,4 +40,25 @@ export interface PostRecipeDTO {
   ni: NutritionInformation;
   ingredients: Ingredient[];
   instructions: Instruction[];
+}
+
+export interface ChefRecipe{
+    recipeId: string;
+    recipeName: string;
+    preparationTime: number;
+    rating: number;
+    imageUrl: string
+}
+
+
+
+interface ChefForRecipe{
+    chefId: string;
+    firstName:string;
+    lastName:string;
+    image_url:string;
+    location:string;
+    phone_number:string;
+    bio:string;
+    years_experience:number;
 }
