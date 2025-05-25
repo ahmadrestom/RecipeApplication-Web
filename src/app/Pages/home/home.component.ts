@@ -15,10 +15,12 @@ import { PexelsService } from '../../Services/PexelsService/pexels.service';
 import { PexelsResponse } from '../../Models/PexelsResponse';
 import { BrandsComponent } from '../../Components/brands/brands.component';
 import { FooterComponent } from '../../Components/footer/footer.component';
-import { Router } from '@angular/router';
+
 import { AuthServiceService } from '../../Services/auth.service';
 import { Recipe } from '../../Models/recipe';
 import { RecipeService } from '../../Services/recipe.service';
+import { threeComponent } from '../../three/three.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +34,8 @@ import { RecipeService } from '../../Services/recipe.service';
     NewSettlerComponent,
     HomeCategoriesComponent,
     BrandsComponent,
-    FooterComponent
+    FooterComponent,
+    threeComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

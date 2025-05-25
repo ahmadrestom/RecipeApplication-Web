@@ -18,11 +18,39 @@ export const routes: Routes = [
         component: HomeComponent,
         canActivate: [authGuard]
     },
-    {path: 'recipe/:id', component: RecipeComponent},
-    {path: 'blogs', component: BlogsComponent},
-    {path: 'view-recipes', component: ViewRecipesComponent},
-    {path: 'view-recipes/:category', component: ViewRecipesComponent},
-    {path: 'saved-recipes', component: SavedRecipesComponent},
-    {path: 'create-recipe', component: CreateRecipeComponent},
-    {path: 'notification', component: NotificationsComponent}
+    {
+        path: 'recipe/:id', 
+        component: RecipeComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'blogs', 
+        component: BlogsComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'view-recipes', 
+        component: ViewRecipesComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'view-recipes/:category', 
+        component: ViewRecipesComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'saved-recipes', 
+        component: SavedRecipesComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'create-recipe', 
+        component: CreateRecipeComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'notification',
+        component: NotificationsComponent,
+        canActivate: [authGuard]
+    }
 ];
