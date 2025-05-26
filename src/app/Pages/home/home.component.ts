@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { HeaderComponent } from "../../Components/header/header.component";
 import { RatingCardComponent } from '../../Components/rating-card/rating-card.component';
 import { ButtonComponent } from '../../Components/button/button.component';
@@ -15,7 +15,7 @@ import { PexelsService } from '../../Services/PexelsService/pexels.service';
 import { PexelsResponse } from '../../Models/PexelsResponse';
 import { BrandsComponent } from '../../Components/brands/brands.component';
 import { FooterComponent } from '../../Components/footer/footer.component';
-
+import { gsap } from 'gsap';
 import { AuthServiceService } from '../../Services/auth.service';
 import { Recipe } from '../../Models/recipe';
 import { RecipeService } from '../../Services/recipe.service';
@@ -38,7 +38,7 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit{
 
   recipes: Recipe[] = [];
 
@@ -69,8 +69,7 @@ export class HomeComponent implements OnInit {
     private pexelsService: PexelsService,
     private router: Router,
     private authService: AuthServiceService,
-    private recipeService: RecipeService
-
+    private recipeService: RecipeService,
   ) { };
 
 
@@ -96,6 +95,7 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
 
   getCategories(): void {
     this.categoryService.getAllCategories().subscribe({

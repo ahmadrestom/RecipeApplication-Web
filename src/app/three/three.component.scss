@@ -1,9 +1,0 @@
-#threejs-container {
-    position: fixed; /* Changed from absolute to fixed for full screen persistent background */
-  
-  width: 100vw;
-  height: 100vh;
-  z-index: -1000; /* Ensure it's behind all other content */
-  pointer-events: none; /* Prevent it from blocking clicks */
-  overflow: hidden;
-}

@@ -26,6 +26,7 @@
     "bootstrap-icons": "^1.11.3",
     "date-fns": "^4.1.0",
     "express": "^4.18.2",
+    "gsap": "^3.13.0",
     "recipe-app": "file:",
     "rxjs": "~7.8.0",
     "swiper": "^11.2.6",
