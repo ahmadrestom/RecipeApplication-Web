@@ -19,7 +19,6 @@ import { FooterComponent } from '../../Components/footer/footer.component';
 import { AuthServiceService } from '../../Services/auth.service';
 import { Recipe } from '../../Models/recipe';
 import { RecipeService } from '../../Services/recipe.service';
-import { threeComponent } from '../../three/three.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -35,7 +34,6 @@ import { Router } from '@angular/router';
     HomeCategoriesComponent,
     BrandsComponent,
     FooterComponent,
-    threeComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

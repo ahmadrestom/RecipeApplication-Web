@@ -19,6 +19,7 @@ export class RecipeHeaderComponent {
   @Input() reviewsCount!: number;
 
   navigate(): void {
+    console.log("Sending chef id now --->>>");
     this.router.navigate(['/chef-info'], { queryParams: { id: this.recipe?.chef.chefId } });    
   }
 

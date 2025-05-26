@@ -1,12 +1,77 @@
-<app-header></app-header>
-<div class="container">
-    <div class="chef-info">
-        <div class="img">
-            <img [src]="chefData.image_url" alt="">
+<!-- <app-header></app-header> -->
+
+<div class="chef-profile-container">
+    <div class="parallax-header" [style.background-image]="'url(' + chefData.image_url + ')'">
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1 class="chef-title">
+                <span class="first-name">{{chefData.firstName}}</span>
+                <span class="last-name">{{chefData.lastName}}</span>
+            </h1>
+            <div class="chef-meta">
+                <span class="location">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    {{chefData.location}}
+                </span>
+                <span class="experience">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L4 7l8 5 8-5-8-5zM4 17l8 5 8-5M4 12l8 5 8-5"></path>
+                    </svg>
+                    {{chefData.years_experience}} Years Experience
+                </span>
+            </div>
         </div>
     </div>
-    <div class="chef-recipes">
-        <app-recipe-card *ngFor="let r of chefRecipes" [ChefRecipe]="r"></app-recipe-card>        
+    <div class="profile-section">
+        <div class="profile-image-container">
+            <div class="image">
+                <img [src]="chefData.image_url" alt="{{chefData.firstName}} {{chefData.lastName}}"
+                    class="profile-image">
+                <div class="image-decoration"></div>
+            </div>
+            <div class="badge">
+                <div class="badge-inner">
+                    <span class="years">{{chefData.years_experience}}</span>
+                    <span class="label">Years</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <div class="bio-section">
+                <h2 class="section-title">About The Chef</h2>
+                <p class="bio-text">{{chefData.bio}}</p>
+            </div>
+
+            <div class="stats-section">
+                <div class="stat-card" *ngFor="let stat of stats">
+                    <div class="stat-value">{{stat.value}}</div>
+                    <div class="stat-label">{{stat.label}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dishes-section">
+        <div class="section-header">
+            <h2 class="section-title">Signature Dishes</h2>
+            <div class="title-decoration"></div>
+        </div>
+
+        <div class="dishes-grid">
+            <app-recipe-card  
+                *ngFor="let r of chefRecipes" 
+                [routerLink]="['/recipe', r.recipeId]"  
+                [ChefRecipe]="r" 
+                class="dish-card">
+            </app-recipe-card>
+        </div>
     </div>
 </div>
+
 <app-footer></app-footer>
