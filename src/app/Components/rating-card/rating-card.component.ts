@@ -6,7 +6,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
   imports: [CommonModule],
   templateUrl: './rating-card.component.html',
   styleUrl: './rating-card.component.scss',
-  encapsulation: ViewEncapsulation.None //note: this method here will alllow external css to affect it
+  encapsulation: ViewEncapsulation.None //note: this method here will alllow external css to affect it,
 })
 export class RatingCardComponent {
   stars: number[] = [1, 2, 3, 4, 5];
