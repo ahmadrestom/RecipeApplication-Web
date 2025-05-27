@@ -14,6 +14,7 @@
             [review]="'Wow, this recipe is a flavor explosion in my mouth. Very delicious'" [rating]="4">
         </app-rating-card>
     </div>
+    <div class="background"></div>
 </div>
 <div class="home-container2" #shareSection>
     <div class="home-image2">
@@ -25,6 +26,11 @@
         <app-button [route]="'create-recipe'" [text]="'Create Recipes'"></app-button>
     </div>
 </div>
+<div class="section-divider">
+    <div class="divider-line"></div>
+    <div class="divider-icon">🍽️</div>
+    <div class="divider-line"></div>
+  </div>
 <app-recipe-container [recipes]="recentRecipes" [title]="'Trending Recipes'"></app-recipe-container>
 <div class="home-container4">
     <h1>Blogs</h1>
@@ -36,6 +42,11 @@
     </div>
 </div>
 <app-recipe-container [recipes]="recipes" id="explore-recipes" [title]="'Explore Recipes'"></app-recipe-container>
+<div class="section-divider">
+    <div class="divider-line"></div>
+    <div class="divider-icon">✨</div>
+    <div class="divider-line"></div>
+  </div>
 <app-new-settler></app-new-settler>
 <h1 style="text-align: center;padding: 50px;">Popular Categories</h1>
 <div class="home-categories">
