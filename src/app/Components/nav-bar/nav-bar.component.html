@@ -1,22 +1,13 @@
 <nav class="nav-bar">
     <ul class="nav-bar-list">
-        <li>
-            <a routerLink="/home">Home</a>
-        </li>
-        <li>
-            <a routerLink="/notification">Notifications</a>
-        </li>
-        <li>
-            <a routerLink="/saved-recipes">Saved Recipes</a>
-        </li>
-        <li>
-            <a (click)="showProfile=true">Profile</a>
+        <li *ngFor="let navItem of navItems">
+            <a [routerLink]="navItem.link || null" [attr.aria-current]="isActive(navItem.link) ? 'page' : null"
+                (click)="navItem.action && navItem.action()">
+                {{navItem.label}}
+            </a>
         </li>
     </ul>
 </nav>
 
-<app-profile-modal
-    *ngIf="showProfile"
-    (close)="showProfile = false"
->
+<app-profile-modal *ngIf="showProfile" (close)="showProfile = false">
 </app-profile-modal>
