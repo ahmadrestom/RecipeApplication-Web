@@ -4,6 +4,7 @@ import { combineLatest, filter, map, Observable, of, switchMap } from 'rxjs';
 import { Role, User } from '../../Models/user';
 import { CommonModule } from '@angular/common';
 import { Chef } from '../../Models/chef';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 interface FullProfile {
   user: User;
@@ -14,7 +15,16 @@ interface FullProfile {
   selector: 'app-profile-modal',
   imports: [CommonModule],
   templateUrl: './profile-modal.component.html',
-  styleUrl: './profile-modal.component.scss'
+  styleUrl: './profile-modal.component.scss',
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms ease-out', style({ opacity: 1 }))
+      ]),
+    ]),
+    
+  ]
 })
 
 export class ProfileModalComponent implements OnInit {

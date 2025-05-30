@@ -1,19 +1,92 @@
-<div class="overlay" (click)="onClose()" *ngIf="profile$  | async as profile">
-    <div class="modal" (click)="$event.stopPropagation()">
-        <button class="close-btn" (click)="onClose()">×</button>
-        <h2>Your Profile</h2>
-        <div class="img">
-            <img [src]="profile.user.imageUrl? profile.user.imageUrl: 'assets/icons/user.png'" alt="Profile image">
+<div class="overlay" (click)="onClose()" *ngIf="profile$ | async as profile" [@fadeInOut]>
+    <div class="modal" (click)="$event.stopPropagation()" [@slideInOut]>
+        <button class="close-btn" (click)="onClose()" aria-label="Close profile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        
+        <div class="profile-header">
+            <div class="avatar-container">
+                <div class="avatar-ring">
+                    <img [src]="profile.user.imageUrl ? profile.user.imageUrl : 'assets/icons/user.png'" 
+                         alt="Profile image" 
+                         class="profile-avatar"
+                         [ngClass]="{'chef-badge': profile.user.role.toString() === 'CHEF'}">
+                </div>
+                <div *ngIf="profile.user.role.toString() === 'CHEF'" class="chef-crown">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#FFD700" stroke="#D4AF37" stroke-width="1.5">
+                        <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zM12 18v4"></path>
+                    </svg>
+                </div>
+            </div>
+            
+            <h2 class="profile-name">{{profile.user.firstName}} {{profile.user.lastName}}</h2>
+            <p class="profile-role">{{profile.user.role.toString() | titlecase}}</p>
         </div>
-        <!-- put your user info here -->
-        <p><strong>Name: </strong>{{profile.user.firstName}} {{profile.user.lastName}}</p>
-        <p><strong>Email: </strong>{{profile.user.email}}</p>
-        <!-- etc. -->
-        <ng-container *ngIf="profile.chefInfo && profile.user.role.toString() === 'CHEF'">
-            <p><strong>Bio: </strong>{{profile.chefInfo.bio}}</p>
-            <p><strong>Experience: </strong>{{profile.chefInfo.years_experience}} Years</p>
-            <p><strong><i class="bi bi-geo-fill"></i>: </strong>{{profile.chefInfo.location}}</p>
-            <p><strong><i class="bi bi-phone"></i>: </strong>{{profile.chefInfo.phone_number}}</p>
-        </ng-container>
+        
+        <div class="profile-body">
+            <div class="info-section">
+                <div class="info-item">
+                    <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <div>
+                        <p class="info-label">Email</p>
+                        <p class="info-value">{{profile.user.email}}</p>
+                    </div>
+                </div>
+                
+                <ng-container *ngIf="profile.chefInfo && profile.user.role.toString() === 'CHEF'">
+                    <div class="info-item">
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <div>
+                            <p class="info-label">Bio</p>
+                            <p class="info-value">{{profile.chefInfo.bio || 'Not specified'}}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <div>
+                            <p class="info-label">Experience</p>
+                            <p class="info-value">{{profile.chefInfo.years_experience}} {{profile.chefInfo.years_experience === 1 ? 'Year' : 'Years'}}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <div>
+                            <p class="info-label">Location</p>
+                            <p class="info-value">{{profile.chefInfo.location || 'Not specified'}}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <div>
+                            <p class="info-label">Phone</p>
+                            <p class="info-value">{{profile.chefInfo.phone_number || 'Not specified'}}</p>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
     </div>
 </div>
