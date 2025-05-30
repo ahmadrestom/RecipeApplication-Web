@@ -1,4 +1,5 @@
-<div *ngIf="recipe != null" class="container">
+<div appScrollAnimation data-animation-direction="left">
+    <div *ngIf="recipe != null" class="container">
     <div class="image">
         <img [src]="recipe.imageUrl" alt="{{recipe.recipeName}} Image">
     </div>
@@ -49,4 +50,5 @@
             <i class="fas fa-fire" style="color:rgb(18, 149, 117, 1);"></i> {{ChefRecipe?.ni?.calories}} kcal
         </span> -->
     </div>
+</div>
 </div>

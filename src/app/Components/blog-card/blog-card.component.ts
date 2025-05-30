@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Blog } from '../../Models/blog';
+import { ScrollAnimationDirective } from '../../Directive/scroll-animation.directive';
 
 @Component({
   selector: 'app-blog-card',
-  imports: [],
+  imports: [ScrollAnimationDirective],
   templateUrl: './blog-card.component.html',
   styleUrl: './blog-card.component.scss'
 })

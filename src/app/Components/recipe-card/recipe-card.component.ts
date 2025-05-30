@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { ChefRecipe, Recipe } from '../../Models/recipe';
 import { CommonModule } from '@angular/common';
+import { ScrollAnimationDirective } from '../../Directive/scroll-animation.directive';
 
 @Component({
   selector: 'app-recipe-card',
-  imports: [CommonModule],
+  imports: [CommonModule,ScrollAnimationDirective],
   templateUrl: './recipe-card.component.html',
   styleUrl: './recipe-card.component.scss'
 })
