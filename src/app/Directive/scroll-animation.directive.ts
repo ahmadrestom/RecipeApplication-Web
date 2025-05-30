@@ -16,7 +16,7 @@ export class ScrollAnimationDirective implements AfterViewInit, OnDestroy{
         }
       });
     },{
-      threshold: 0.1 //how much of the element appear while scrolling to animate
+      threshold: 0.1 //how much of the element % appear while scrolling to animate
     });
   }
   ngAfterViewInit(){

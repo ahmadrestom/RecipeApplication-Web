@@ -60,5 +60,7 @@
 <div class="brands">
     <app-brands *ngFor="let b of brands" [brand]="b"></app-brands>
 </div>
-<button (click)="logout()">Log Out</button>
+<div class="outline-button">
+    <app-outline-button [text]="'Log out'"></app-outline-button>
+</div>
 <app-footer class="app-footer"></app-footer>

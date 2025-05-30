@@ -20,6 +20,7 @@ import { AuthServiceService } from '../../Services/auth.service';
 import { Recipe } from '../../Models/recipe';
 import { RecipeService } from '../../Services/recipe.service';
 import { Router } from '@angular/router';
+import { OutlineButtonComponent } from '../../Components/outline-button/outline-button.component';
 
 @Component({
   selector: 'app-home',
@@ -34,6 +35,7 @@ import { Router } from '@angular/router';
     HomeCategoriesComponent,
     BrandsComponent,
     FooterComponent,
+    OutlineButtonComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
