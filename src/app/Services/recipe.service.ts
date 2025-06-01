@@ -17,7 +17,7 @@ export class RecipeService {
   private allRecipeSubject = new BehaviorSubject<Recipe[] | null>(null);
   allRecipes$ = this.allRecipeSubject.asObservable();
 
-  private recentRecipesSubject = new BehaviorSubject<Recipe[] | null>(null);
+  private recentRecipesSubject = new BehaviorSubject<Recipe[] | undefined>(undefined);
   recentRecipes$ = this.recentRecipesSubject.asObservable();
 
   private homeRecipesSubject = new BehaviorSubject<Recipe[] | null>(null);

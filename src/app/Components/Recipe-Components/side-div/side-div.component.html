@@ -1,1 +1,7 @@
 <app-ni [ni]="recipe.ni"></app-ni>
+<!-- <h3>Recent Recipes</h3> -->
+<div class="recent-recipes">
+    <div *ngFor="let r of recentRecipes">
+        <app-recipe-card variant="minimal" [recipe]="r"></app-recipe-card>
+    </div>
+</div>

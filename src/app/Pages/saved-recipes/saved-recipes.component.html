@@ -1,7 +1,7 @@
 <div class="container">
     <app-header></app-header>
     <main class="main-content">
-        <ng-container *ngIf="recipes && recipes.length>0; else noFavorites">
+        <ng-container *ngIf="recipes  && recipes.length>0; else noFavorites">
             <app-recipe-container [recipes]="recipes"></app-recipe-container>
         </ng-container>
         <ng-template #noFavorites >

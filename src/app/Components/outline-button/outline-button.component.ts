@@ -12,4 +12,10 @@ export class OutlineButtonComponent {
   @Input() action?: ()=>void;
   @Input() route?: string = '';
 
+  execute(){
+    if(this.action){
+      this.action()
+    }
+  }
+
 }

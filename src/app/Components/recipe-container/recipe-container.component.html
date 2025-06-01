@@ -1,6 +1,7 @@
 <h1>{{title}}</h1>
 <div class="recipes">
-    <app-recipe-card 
+    <app-recipe-card
+    [variant]="'default'" 
     *ngFor="let r of recipes" 
     [recipe]="r" 
     [routerLink]="['/recipe', r.recipeId]" 

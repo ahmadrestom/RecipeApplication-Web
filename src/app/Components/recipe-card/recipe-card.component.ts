@@ -11,6 +11,7 @@ import { ScrollAnimationDirective } from '../../Directive/scroll-animation.direc
 })
 export class RecipeCardComponent {
 
+  @Input() variant: 'default' | 'minimal' = 'default';
   @Input() recipe: Recipe|null = null;
   @Input() ChefRecipe: ChefRecipe | null = null;
 
