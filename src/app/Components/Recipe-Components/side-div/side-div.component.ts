@@ -5,10 +5,11 @@ import { RecipeCardComponent } from "../../recipe-card/recipe-card.component";
 import { RecipeContainerComponent } from '../../recipe-container/recipe-container.component';
 import { NgClass, NgFor } from '@angular/common';
 import { RecipeService } from '../../../Services/recipe.service';
+import { NewSettlerComponent } from "../../new-settler/new-settler.component";
 
 @Component({
   selector: 'app-side-div',
-  imports: [NiComponent, NgFor, RecipeCardComponent],
+  imports: [NiComponent, NgFor, RecipeCardComponent, NewSettlerComponent],
   templateUrl: './side-div.component.html',
   styleUrl: './side-div.component.scss'
 })

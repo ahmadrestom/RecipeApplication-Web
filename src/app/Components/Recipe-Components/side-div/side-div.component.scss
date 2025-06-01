@@ -1,15 +1,18 @@
 :host {
     flex: 1;
     display: block;
-    border: 2px solid green;
+
+    h3{
+        margin-top: 120px;
+    }
 
     .recent-recipes {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: start;
+        justify-content: start;
         gap: 15px;
         padding: 10px 0;
-        margin-top: 50px;
     }
 }
 

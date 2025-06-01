@@ -1,6 +1,6 @@
-<div class="container">
-    <h1>Let's Stay In Touch</h1>
-    <p>Join our newsettler, so that we reach out to you with<br>our new recipes and blogs.</p>
+<div class="container" [ngClass]="varient">
+    <h1 [innerHTML]="header"></h1>
+    <p [innerHTML]="text"></p>
     <div class="email">
         <input type="email" placeholder="Enter your email" autocomplete="flase">
         <app-button [text]="'Subscribe'"></app-button>

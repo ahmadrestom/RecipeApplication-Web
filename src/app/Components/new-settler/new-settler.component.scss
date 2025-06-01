@@ -11,10 +11,35 @@
         align-items: center;
         justify-content: center;
 
+        &.minimal {
+            padding: 30px ;
+            h1 {
+                text-align: center;
+                font-size: 1.4rem;
+            }
+
+            p {
+                text-align: center;
+                font-size: 1rem;
+            }
+
+            .email {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                input {
+                    width: 80%;
+                    border: none;
+                    padding: 15px 15px;
+                    border-radius: 5px;
+                }
+            }
+        }
+
         p {
             color: gray;
             font-size: 1.5rem;
-            
         }
 
         .email {
