@@ -1,46 +1,76 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    display: block;
+    min-height: 100vh;
 
-    .container {
-        .main-content {
-            .noFavorites {
-                margin-top: 40px;
+    .favorites-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+
+        .favorites-main {
+            flex: 1;
+            padding: 2rem 5%;
+
+            .favorites-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 2rem;
+                padding: 1rem 0;
+            }
+
+            .empty-favorites {
                 display: flex;
-                flex-direction: row;
                 justify-content: center;
                 align-items: center;
+                min-height: 60vh;
 
-                a {
-                    text-decoration: none;
-                    color: rgba(18, 149, 117, 1);
+                .empty-content {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    max-width: 600px;
+                    text-align: center;
 
-                    &:hover {
-                        cursor: pointer;
-                    }
-                }
+                    .empty-text {
+                        margin-top: 1.5rem;
 
-                .empty-wrapper {
-                    max-width: 420px;
-                    padding: 2rem 1rem;
-                    animation: fadeIn 0.7s ease;
-                }
+                        i.bi-heartbreak {
+                            font-size: 3rem;
+                            color: #e63946;
+                            margin-bottom: 1rem;
+                        }
 
-                /* Simple fade-in */
-                @keyframes fadeIn {
-                    from {
-                        opacity: 0;
-                        transform: translateY(10px);
-                    }
+                        h3 {
+                            font-size: 1.5rem;
+                            margin-bottom: 0.5rem;
+                            color: #333;
+                        }
 
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
+                        p {
+                            color: #666;
+                            margin-bottom: 1.5rem;
+                        }
+
+                        .explore-btn {
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 0.5rem;
+                            padding: 0.75rem 1.5rem;
+                            background: rgb(18, 149, 117);
+                            color: white;
+                            border-radius: 50px;
+                            text-decoration: none;
+                            transition: all 0.3s ease;
+
+                            &:hover {
+                                background: (rgb(18, 149, 117), 10%);
+                                transform: translateY(-2px);
+                                box-shadow: 0 4px 12px rgba(18, 149, 117, 0.2);
+                            }
+                        }
                     }
                 }
             }
         }
-
     }
 }

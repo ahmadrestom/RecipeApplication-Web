@@ -47,6 +47,10 @@
         }
     }
 
+    .recipe-info{
+        width: 100%;
+    }
+
     .image {
         width: 100%;
         height: 200px;
@@ -92,6 +96,7 @@
     }
 
     .chef-cal {
+        margin: auto;
         width: 90%;
         display: flex;
         flex-direction: row;
@@ -123,3 +128,160 @@
         }
     }
 }
+
+.favorite-recipe-card {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .image {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+        
+        .recipe-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+    }
+    
+    .recipe-info {
+        padding: 16px;
+        
+        .star-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            
+            .star {
+                color: #e2e2e2;
+                font-size: 18px;
+                margin-right: 2px;
+                
+                &.filled {
+                    color: #FFD700;
+                }
+            }
+            
+            .rating-value {
+                margin-left: 6px;
+                font-size: 14px;
+                color: #666;
+                font-weight: 500;
+            }
+        }
+        
+        .recipeName {
+            margin-bottom: 12px;
+            
+            h3 {
+                font-size: 18px;
+                font-weight: 600;
+                color: #333;
+                margin: 0;
+                line-height: 1.3;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
+        
+        .recipe-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            
+            span {
+                display: flex;
+                align-items: center;
+                color: #666;
+                
+                svg {
+                    margin-right: 4px;
+                    fill: #666;
+                }
+            }
+            
+            .difficulty {
+                text-transform: capitalize;
+                padding: 2px 8px;
+                border-radius: 4px;
+                font-weight: 500;
+                
+                &.Easy {
+                    background: #e8f5e9;
+                    color: #2e7d32;
+                }
+                &.Medium {
+                    background: #fff8e1;
+                    color: #ff8f00;
+                }
+                &.Hard {
+                    background: #ffebee;
+                    color: #c62828;
+                }
+            }
+        }
+        
+        .chef-cal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px dashed #eee;
+            
+            .chef {
+                display: flex;
+                align-items: center;
+                
+                .chef-image {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    margin-right: 8px;
+                    border: 2px solid #fff;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+                
+                .chef-name {
+                    font-size: 13px;
+                    color: #666;
+                    margin: 0;
+                }
+            }
+            
+            .calories {
+                font-size: 13px;
+                color: #666;
+                display: flex;
+                align-items: center;
+                
+                svg {
+                    margin-right: 4px;
+                    fill: #666;
+                }
+            }
+        }
+    }
+}
+

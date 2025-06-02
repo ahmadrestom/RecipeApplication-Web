@@ -5,26 +5,26 @@
         </div>
         <div class="recipe-info">
             <div class="star-rating">
-            <ng-container *ngFor="let star of stars">
-                <i class="star" [class.filled]="star <= recipe.rating!">
-                    ★
-                </i>
-            </ng-container>
-        </div>
-        <div class="recipeName">
-            <p>{{recipe.recipeName}}</p>
-        </div>
-        <div class="chef-cal">
-            <div class="chef" *ngIf="variant === 'default'">
-                <div class="chef-image">
-                    <img [src]="recipe.chef.image_url">
-                </div>
-                <p>{{recipe.chef.firstName}} {{recipe.chef.lastName}}</p>
+                <ng-container *ngFor="let star of stars">
+                    <i class="star" [class.filled]="star <= recipe.rating!">
+                        ★
+                    </i>
+                </ng-container>
             </div>
-            <span>
-                <i class="fas fa-fire" style="color:rgb(18, 149, 117, 1);"></i> {{recipe.ni.calories}} kcal
-            </span>
-        </div>
+            <div class="recipeName">
+                <p>{{recipe.recipeName}}</p>
+            </div>
+            <div class="chef-cal">
+                <div class="chef" *ngIf="variant === 'default'">
+                    <div class="chef-image">
+                        <img [src]="recipe.chef.image_url">
+                    </div>
+                    <p>{{recipe.chef.firstName}} {{recipe.chef.lastName}}</p>
+                </div>
+                <span>
+                    <i class="fas fa-fire" style="color:rgb(18, 149, 117, 1);"></i> {{recipe.ni.calories}} kcal
+                </span>
+            </div>
         </div>
     </div>
 
@@ -41,6 +41,51 @@
         </div>
         <div class="ChefRecipeName">
             <p>{{ChefRecipe.recipeName}}</p>
+        </div>
+    </div>
+
+    <div *ngIf="favoriteRecipe != null" class="favorite-recipe-card">
+        <div class="image">
+            <img [src]="favoriteRecipe.imageUrl" alt="{{favoriteRecipe.recipeName}} Image" class="recipe-image">
+            
+        </div>
+
+        <div class="recipe-info">
+            <div class="star-rating">
+                <ng-container *ngFor="let star of stars">
+                    <i class="star" [class.filled]="star <= favoriteRecipe.rating!">
+                        ★
+                    </i>
+                </ng-container>
+                <span class="rating-value">{{favoriteRecipe.rating | number:'1.1-1'}}</span>
+            </div>
+
+            <div class="recipeName">
+                <h3>{{favoriteRecipe.recipeName}}</h3>
+            </div>
+
+            <div class="recipe-meta">
+                <span class="cooking-time">
+                    <svg width="16" height="16" viewBox="0 0 24 24">
+                        <path
+                            d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+                        <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                    </svg>
+                    {{favoriteRecipe.cookingTime}} mins
+                </span>
+                <span class="difficulty">
+                    {{favoriteRecipe.difficultyLevel}}
+                </span>
+            </div>
+
+            <div class="chef-cal" *ngIf="variant === 'default'">
+                <div class="chef">
+                    <div class="chef-image">
+                        <img [src]="favoriteRecipe.chefPictureUrl" alt="{{favoriteRecipe.chefName}}">
+                    </div>
+                    <p class="chef-name">{{favoriteRecipe.chefName}}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -17,10 +17,11 @@ export class RecipeHeaderComponent {
   stars: number[] = [1, 2, 3, 4, 5];
   @Input() rating: number=0;
   @Input() reviewsCount!: number;
+  @Input() isFavorite: boolean = false;
 
   navigate(): void {
     console.log("Sending chef id now --->>>");
-    this.router.navigate(['/chef-info'], { queryParams: { id: this.recipe?.chef.chefId } });    
+    this.router.navigate(['/chef-info'], { queryParams: { id: this.recipe?.chef.chefId } });
   }
 
 }

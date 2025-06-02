@@ -5,7 +5,7 @@ import { BehaviorSubject, catchError, of, switchMap, tap } from 'rxjs';
 import { privateUrl, publicUrl } from '../../environments/environment';
 import { Role, User } from '../Models/user';
 import { Chef, UpgradeToChef } from '../Models/chef';
-import { Recipe } from '../Models/recipe';
+import { FavoriteRecipe, Recipe } from '../Models/recipe';
 
 @Injectable({ providedIn: 'root' })
 export class AuthServiceService {
@@ -19,7 +19,7 @@ export class AuthServiceService {
 
   private isAuthenticated = new BehaviorSubject<boolean>(false);
 
-  private favoritesSubject = new BehaviorSubject<Recipe[] | null>(null);
+  private favoritesSubject = new BehaviorSubject<FavoriteRecipe[] | null>(null);
   favorites$ = this.favoritesSubject.asObservable();
 
   private userSubject = new BehaviorSubject<User | null>(null);
@@ -41,11 +41,11 @@ export class AuthServiceService {
     })
   }
 
-  fetchUserFavorites() {
+  fetchUserFavorites(){
     const token = localStorage.getItem('auth_token');
     if (!token) return;
 
-    this.http.get<Recipe[]>(this.userFavoritesUrl).subscribe({
+    this.http.get<FavoriteRecipe[]>(this.userFavoritesUrl).subscribe({
       next: (data) => {
         if (data == null) {
           this.favoritesSubject.next(null);

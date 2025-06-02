@@ -26,6 +26,23 @@ export interface Recipe {
     instructions: Instruction[];
     reviews: Review[];
 }
+
+export interface FavoriteRecipe{
+    recipeId: string;
+    recipeName: string;
+    description:string;
+    timeUploaded: string;
+    preparationTime: number;
+    cookingTime: number;
+    difficultyLevel: DifficultyLevel;
+    rating: number;
+    imageUrl: string;
+    categoryName: string;
+    chefName: string;
+    chefPictureUrl: string;
+
+}
+
 export interface PostRecipeDTO {
   recipeName: string;
   description: string;
@@ -49,8 +66,6 @@ export interface ChefRecipe{
     rating: number;
     imageUrl: string
 }
-
-
 
 interface ChefForRecipe{
     chefId: string;

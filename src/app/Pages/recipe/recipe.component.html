@@ -1,7 +1,7 @@
 <div class="container">
     <app-header></app-header>
     <p>Home &rarr; Recipe &rarr; {{recipe?.recipeName}}</p>
-    <app-recipe-header [reviewsCount]="recipe?.reviews?.length ?? 0" [recipe]="this.recipe!"></app-recipe-header>
+    <app-recipe-header [isFavorite]="isFavorite" [reviewsCount]="recipe?.reviews?.length ?? 0" [recipe]="this.recipe!"></app-recipe-header>
     <hr>
     <div class="divs">
         <app-main-div [recipe]="recipe!"></app-main-div>
