@@ -1,7 +1,7 @@
 <div class="container">
     <app-ni [ni]="recipe.ni"></app-ni>
     <h3>Recent Recipes</h3>
-    <div class="recent-recipes">
+    <div class="recipes recent-recipes">
         <div *ngFor="let r of recentRecipes">
             <app-recipe-card variant="minimal" [recipe]="r"></app-recipe-card>
         </div>
@@ -12,7 +12,8 @@
         text="for the latest health tips and delicious<br> recipes"
         >
     </app-new-settler>
-    <div class="related-recipes">
+    <h3>Related Recipes</h3>
+    <div class="recipes related-recipes">
         <div *ngFor="let r of relatedRecipes">
             <app-recipe-card variant="minimal" [recipe]="r"></app-recipe-card>
         </div>

@@ -15,7 +15,7 @@ import { NewSettlerComponent } from "../../new-settler/new-settler.component";
 export class SideDivComponent implements OnInit, OnChanges {
 
   recentRecipes: Recipe[] | undefined = [];
-  relatedRecipes: Recipe[] | null = [];
+  relatedRecipes: Recipe[] | undefined = [];
 
   @Input() recipe!: Recipe;
 
@@ -43,7 +43,10 @@ export class SideDivComponent implements OnInit, OnChanges {
   fetchRelatedRecipes() {
     this.recipeService.getRecipesByCategory(this.recipe.category.category_name);
     this.recipeService.recipesByCategory$.subscribe((recipes) => {
-      this.relatedRecipes = recipes;
+      const filtered = recipes?.filter(
+      r => r.recipeName !== this.recipe.recipeName
+    );
+      this.relatedRecipes = filtered;
     })
   }
 }
