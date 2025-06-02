@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Recipe } from '../../../Models/recipe';
 import { NiComponent } from '../ni/ni.component';
 import { RecipeCardComponent } from "../../recipe-card/recipe-card.component";
-import { RecipeContainerComponent } from '../../recipe-container/recipe-container.component';
-import { NgClass, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { RecipeService } from '../../../Services/recipe.service';
 import { NewSettlerComponent } from "../../new-settler/new-settler.component";
 
@@ -13,23 +12,38 @@ import { NewSettlerComponent } from "../../new-settler/new-settler.component";
   templateUrl: './side-div.component.html',
   styleUrl: './side-div.component.scss'
 })
-export class SideDivComponent implements OnInit{
+export class SideDivComponent implements OnInit, OnChanges {
 
   recentRecipes: Recipe[] | undefined = [];
+  relatedRecipes: Recipe[] | null = [];
 
-  @Input() recipe!:Recipe;
+  @Input() recipe!: Recipe;
 
-  constructor(private recipeService: RecipeService){}
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
-      this.fetchRecentRecipes();
+    this.fetchRecentRecipes();
+
   }
 
-  fetchRecentRecipes(){
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['recipe']?.currentValue) {
+      this.fetchRelatedRecipes();
+    }
+  }
+
+
+  fetchRecentRecipes() {
     this.recipeService.getRecentRecipes();
     this.recipeService.recentRecipes$.subscribe((recipes) => {
-      this.recentRecipes = recipes?.slice(0,3);
-    }) 
+      this.recentRecipes = recipes?.slice(0, 3);
+    })
   }
 
+  fetchRelatedRecipes() {
+    this.recipeService.getRecipesByCategory(this.recipe.category.category_name);
+    this.recipeService.recipesByCategory$.subscribe((recipes) => {
+      this.relatedRecipes = recipes;
+    })
+  }
 }

@@ -12,4 +12,9 @@
         text="for the latest health tips and delicious<br> recipes"
         >
     </app-new-settler>
+    <div class="related-recipes">
+        <div *ngFor="let r of relatedRecipes">
+            <app-recipe-card variant="minimal" [recipe]="r"></app-recipe-card>
+        </div>
+    </div>
 </div>

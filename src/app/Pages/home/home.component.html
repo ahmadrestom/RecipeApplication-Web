@@ -51,7 +51,7 @@
 <h1 style="text-align: center;padding: 50px;">Popular Categories</h1>
 <div class="home-categories">
     <app-home-categories *ngFor="let category of visibileCategories" [category]="category"
-        [imageUrl]="categoryImages[category.categoryName]"></app-home-categories>
+        [imageUrl]="categoryImages[category.category_name]"></app-home-categories>
 </div>
 <div class="view-more-container">
     <a href="" (click)="viewMoreCategories(); $event.preventDefault()" *ngIf="categoriesToShow<categories.length">View

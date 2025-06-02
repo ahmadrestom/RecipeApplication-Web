@@ -15,7 +15,7 @@
         <label for="category">Category:</label>
         <select name="category" id="category" [(ngModel)]="recipe.categoryId">
             <option value="" disabled selected hidden>-- Select a category --</option>
-            <option *ngFor="let c of categories" [value]="c.category_id">{{c.categoryName}}</option>
+            <option *ngFor="let c of categories" [value]="c.category_id">{{c.category_name}}</option>
         </select>
     </div>
     <div class="form-elemnt">

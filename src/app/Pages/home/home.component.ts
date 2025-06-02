@@ -113,9 +113,9 @@ export class HomeComponent implements OnInit{
   }
   getImages(): void {
     this.categories.forEach(category => {
-      this.pexelsService.searchImages(category.categoryName, 1).subscribe((data: PexelsResponse) => {
+      this.pexelsService.searchImages(category.category_name, 1).subscribe((data: PexelsResponse) => {
         console.log(data);
-        this.categoryImages[category.categoryName] = data.photos[0]?.src.medium;
+        this.categoryImages[category.category_name] = data.photos[0]?.src.medium;
       });
     });
   }

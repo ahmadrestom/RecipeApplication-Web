@@ -17,7 +17,7 @@ export class HomeCategoriesComponent{
   constructor(private route: Router){}
 
   onClick(){
-    this.route.navigate(['/view-recipes/',this.category?.categoryName])
+    this.route.navigate(['/view-recipes/',this.category?.category_name])
   }
 
 
