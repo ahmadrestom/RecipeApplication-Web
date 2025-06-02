@@ -17,7 +17,7 @@ export class RecipeHeaderComponent {
   stars: number[] = [1, 2, 3, 4, 5];
   @Input() rating: number=0;
   @Input() reviewsCount!: number;
-  @Input() isFavorite: boolean = false;
+  @Input() isFavorite!: boolean;
 
   navigate(): void {
     console.log("Sending chef id now --->>>");
