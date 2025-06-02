@@ -2,13 +2,13 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Recipe } from '../../../Models/recipe';
 import { NiComponent } from '../ni/ni.component';
 import { RecipeCardComponent } from "../../recipe-card/recipe-card.component";
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { RecipeService } from '../../../Services/recipe.service';
 import { NewSettlerComponent } from "../../new-settler/new-settler.component";
 
 @Component({
   selector: 'app-side-div',
-  imports: [NiComponent, NgFor, RecipeCardComponent, NewSettlerComponent],
+  imports: [NiComponent, NgFor, RecipeCardComponent, NewSettlerComponent, NgIf],
   templateUrl: './side-div.component.html',
   styleUrl: './side-div.component.scss'
 })

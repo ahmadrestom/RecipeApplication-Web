@@ -12,8 +12,8 @@
         text="for the latest health tips and delicious<br> recipes"
         >
     </app-new-settler>
-    <h3>Related Recipes</h3>
-    <div class="recipes related-recipes">
+    <h3 *ngIf="relatedRecipes != null && relatedRecipes.length!=0">Related Recipes</h3>
+    <div *ngIf="relatedRecipes != null && relatedRecipes.length!=0" class="recipes related-recipes">
         <div *ngFor="let r of relatedRecipes">
             <app-recipe-card variant="minimal" [recipe]="r"></app-recipe-card>
         </div>
