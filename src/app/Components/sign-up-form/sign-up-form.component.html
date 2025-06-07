@@ -11,7 +11,7 @@
           <path
             d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
         </svg>
-        <input formControlName="firstName" type="text" placeholder="First Name" />
+        <input formControlName="firstName" type="text" placeholder="First Name" autocomplete="false"/>
       </div>
       <div class="error-message" *ngIf="signUpForm.get('firstName')?.invalid && signUpForm.get('firstName')?.touched">
         <small>First name is required</small>
@@ -24,7 +24,7 @@
           <path
             d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
         </svg>
-        <input formControlName="lastName" type="text" placeholder="Last Name" />
+        <input formControlName="lastName" type="text" placeholder="Last Name" autocomplete="false" />
       </div>
       <div class="error-message" *ngIf="signUpForm.get('lastName')?.invalid && signUpForm.get('lastName')?.touched">
         <small>Last name is required</small>
@@ -37,7 +37,7 @@
           <path
             d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 4l-7 5-7-5V6l7 5 7-5v2z" />
         </svg>
-        <input formControlName="email" type="email" placeholder="Email" />
+        <input formControlName="email" type="email" placeholder="Email" autocomplete="false"/>
       </div>
       <div class="error-message" *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
         <small>Email is required</small>

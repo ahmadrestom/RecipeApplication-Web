@@ -7,6 +7,7 @@ import { User } from '../../Models/user';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { UpgradeToChefComponent } from "../../Components/Create-Recipe/upgrade-to-chef/upgrade-to-chef.component";
+import { ButtonComponent } from '../../Components/button/button.component';
 
 @Component({
   selector: 'app-create-recipe',

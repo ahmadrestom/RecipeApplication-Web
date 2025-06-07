@@ -6,10 +6,11 @@ import { NgFor } from '@angular/common';
 import { PostRecipeDTO } from '../../../Models/recipe';
 import { DifficultyLevel } from '../../../Models/recipe';
 import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from "../../button/button.component";
 
 @Component({
   selector: 'app-create-recipe-form',
-  imports: [RecipeImagePickerComponent, NgFor, FormsModule],
+  imports: [RecipeImagePickerComponent, NgFor, FormsModule, ButtonComponent],
   templateUrl: './create-recipe-form.component.html',
   styleUrl: './create-recipe-form.component.scss'
 })
